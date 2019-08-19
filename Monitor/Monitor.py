@@ -312,9 +312,12 @@ class ADB_Frame(wx.Frame):
         
         self.connect_again_btn = wx.Button(parent = self.panel, label = "C", size = (25, 25))
         self.Bind(wx.EVT_BUTTON, self.Btn_connect_again_func, self.connect_again_btn)
-        
-        self.wifi_connect_status_text = wx.StaticText(  self.panel,
-                                                        label = "Wifi Disconnect")
+
+        #morgen add
+        self.driver_version = wx.ToggleButton(parent=self.panel, label="Driver V2", size=(60, 25))
+        self.Bind(wx.EVT_TOGGLEBUTTON, self.Btn_driver_version, self.driver_version)
+
+        self.wifi_connect_status_text = wx.StaticText(self.panel, label = "Wifi Disconnect")
 
         self.wifi_connect_status_text.SetForegroundColour((255, 0, 0))
                 
@@ -426,7 +429,8 @@ class ADB_Frame(wx.Frame):
         hsize.AddSpacer(space)
         hsize.Add(self.wifi_connect_status_text, 0, wx.ALIGN_LEFT)
         hsize.AddSpacer(space)
-        hsize.Add(self.connect_again_btn, 0, wx.ALIGN_LEFT)      
+        hsize.Add(self.connect_again_btn, 0, wx.ALIGN_LEFT)
+        hsize.Add(self.driver_version, 0, wx.ALIGN_LEFT)#morgen add
         self.sizer.Add(hsize, 0, wx.ALIGN_TOP)
         
         self.sizer.AddSpacer(space)
@@ -588,6 +592,12 @@ class ADB_Frame(wx.Frame):
                 self.data_diag = cus_diag_num
             else:
                 self.data_diag = SRAM_DIFF_DIAG
+    #morgen add
+    def Btn_driver_version(self, event):
+        if self.driver_version.GetValue() == True:
+            print("Select driver V2")
+        else:
+            print("Select driver V1")
 
     def Logging_flag_func(self, event):
         if self.toggle_logging_btn.GetValue() == False:
