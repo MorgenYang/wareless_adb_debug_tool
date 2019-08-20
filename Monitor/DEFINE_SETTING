@@ -1,6 +1,6 @@
 DRIVER_VERSION = V2
 
-#driver v1
+#DRIVER V1
 ------------------------------------------------------
 DIAG_PATH = /proc/android_touch/diag
 REG_PATH = /proc/android_touch/register
@@ -14,7 +14,7 @@ REG_PATH = /proc/android_touch/register
 #DIAG_PATH = /d/himax_debug_seq/diag
 #REG_PATH = /sys/himax_debug/register
 
-#driver v2
+#DRIVER V2
 ------------------------------------------------------
 DEBUG_PATH = /proc/android_touch/debug
 STACK_PATH = /proc/android_touch/diag/stack
@@ -23,7 +23,7 @@ STACK_PATH = /proc/android_touch/diag/stack
 #DCS_PATH = /proc/android_touch/diag/dc_s
 #IIRS_PATH = /proc/android_touch/diag/iir_s
 
-#common
+#COMMON
 ------------------------------------------------------
 HX_FOLDER_PATH = /sdcard/HimaxAPK/tmp
 WRITE_REG_NUM = 5
