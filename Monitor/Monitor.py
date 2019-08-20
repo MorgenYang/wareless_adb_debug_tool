@@ -12,9 +12,6 @@ import sys
 sys.path.append('./include')
 from Replace_bot import Replace_section_flow
 
-'''================================
-            DEFINE
-================================'''
 PATH_OPCODE = [ "REG_PATH",
                 "DIAG_PATH",
                 "DEBUG_PATH",
@@ -33,11 +30,8 @@ DIFF_DIAG = 1
 DC_DIAG = 2
 SRAM_DIFF_DIAG = 11
 SRAM_DC_DIAG = 12
-DRIER_VERSION = 0
+DRIVER_VERSION = 0
 
-'''================================
-            Class
-================================'''
 class Panel_info():
 
     def __init__(self, adb):
@@ -52,7 +46,7 @@ class Panel_info():
         self.READ_DCS_PATH = ''
         self.READ_IIRS_PATH = ''
         self.READ_STACK_PATH = ''
-        self.driver_version = DRIER_VERSION
+        self.driver_version = DRIVER_VERSION
         #morgen add end
 
         self.setting_path()
@@ -297,12 +291,12 @@ class Panel_info():
             self._switch_raw_data_read_status = False
         else:
             self._switch_raw_data_read_status = True
-        
+
 class ADB_Frame(wx.Frame):
     
     def __init__(self):
         print ("Create ADB GUI")
-        wx.Frame.__init__(self, parent = None, title = "ADB monitor", size = (450, 400))
+        wx.Frame.__init__(self, parent = None, title = "ADB monitor 1.0.1", size = (580, 500))
         self.counter = 1000
         self.device_ip = ""
         self.device_ip_port = ""
@@ -331,7 +325,7 @@ class ADB_Frame(wx.Frame):
         self.panel = wx.Panel(self)
 
         self.bind_component()
-        self.component_arrangement()      
+        self.component_arrangement()
         
         self.panel.SetSizerAndFit(self.box_sizer)
 
@@ -914,5 +908,3 @@ def main():
     
 if __name__ == "__main__":
     main()
-
-
