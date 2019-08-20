@@ -115,7 +115,7 @@ class Panel_info():
                             print("driver version was wrong,please check it again!")
                             break
                     else:
-                        pass
+                        print("please set driver version!")
 
                     if l[0] in PATH_OPCODE:
                         path = l[1]
@@ -128,29 +128,21 @@ class Panel_info():
                         if self.driver_version == 1:
                             if l[0] == "REG_PATH":
                                 self.REG_PATH = path
-                                print(self.REG_PATH)
                             elif l[0] == "DIAG_PATH":
                                 self.DIAG_PATH = path
-                                print(self.DIAG_PATH)
                             elif l[0] == 'HX_FOLDER_PATH':
                                 self.HX_FOLDER_PATH = path
-                                print(self.HX_FOLDER_PATH)
                         elif self.driver_version == 2:
                             if l[0] == "DEBUG_PATH":
                                 self.DEBUG_PATH = path
-                                print(self.DEBUG_PATH)
                             elif l[0] == "BANKS_PATH":
                                 self.READ_BANKS_PATH = path
-                                print(self.READ_BANKS_PATH)
                             elif l[0] == "DCS_PATH":
                                 self.READ_DCS_PATH = path
-                                print(self.READ_DCS_PATH)
                             elif l[0] == "IIRS_PATH":
                                 self.READ_IIRS_PATH = path
-                                print(self.READ_IIRS_PATH)
                             elif l[0] == "STACK_PATH":
                                 self.READ_STACK_PATH = path
-                                print(self.READ_STACK_PATH)
                         elif self.driver_version == 0:
                             print("please set driver version now")
                         else:
