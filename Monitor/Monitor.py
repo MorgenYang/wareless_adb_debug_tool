@@ -17,6 +17,11 @@ from Replace_bot import Replace_section_flow
 ================================'''
 PATH_OPCODE = [ "REG_PATH",
                 "DIAG_PATH",
+                "DEBUG_PATH",
+                "BANKS_PATH",
+                "DCS_PATH",
+                "IIRS_PATH",
+                "STACK_PATH",
                 "HX_FOLDER_PATH",
                 "WRITE_REG_NUM",
                 "PORT_NUM",
@@ -28,6 +33,7 @@ DIFF_DIAG = 1
 DC_DIAG = 2
 SRAM_DIFF_DIAG = 11
 SRAM_DC_DIAG = 12
+DRIER_VERSION = 0
 
 '''================================
             Class
@@ -39,15 +45,32 @@ class Panel_info():
         self.DIAG_PATH = ''
         self.REG_PATH = ''
         self.HX_FOLDER_PATH = ''
-        
+
+        #morgen add start
+        self.DEBUG_PATH = ''
+        self.READ_BANKS_PATH = ''
+        self.READ_DCS_PATH = ''
+        self.READ_IIRS_PATH = ''
+        self.READ_STACK_PATH = ''
+        self.driver_version = DRIER_VERSION
+        #morgen add end
+
         self.setting_path()
-        
-        self.ECHO_DIAG = "echo %s > " + self.DIAG_PATH
-        self.CAT_DIAG = "cat " + self.DIAG_PATH
-        
-        self.ECHO_WRITE_REGISTER = "echo w:x%s:x%s > " + self.REG_PATH
-        self.ECHO_READ_REGISTER = "echo r:x%s > " + self.REG_PATH
-        self.CAT_READ_REGISTER = "cat " + self.REG_PATH
+
+        if self.driver_version == 1:
+            self.ECHO_DIAG = "echo %s > " + self.DIAG_PATH
+            self.CAT_DIAG = "cat " + self.DIAG_PATH
+            self.ECHO_WRITE_REGISTER = "echo w:x%s:x%s > " + self.REG_PATH
+            self.ECHO_READ_REGISTER = "echo r:x%s > " + self.REG_PATH
+            self.CAT_READ_REGISTER = "cat " + self.REG_PATH
+        elif self.driver_version == 2:
+            self.ECHO_DIAG = "echo diag,%s > " + self.DEBUG_PATH
+            self.CAT_DIAG = "cat " + self.READ_STACK_PATH
+            self.ECHO_WRITE_REGISTER = "echo register,w:x%s:x%s > " + self.DEBUG_PATH
+            self.ECHO_READ_REGISTER = "echo register,r:x%s > " + self.DEBUG_PATH
+            self.CAT_READ_REGISTER = "cat " + self.DEBUG_PATH
+        elif self.driver_version == 0:
+            pass
 
         self.PULL_HX_FILE = "adb pull " + self.HX_FOLDER_PATH
 
@@ -82,7 +105,24 @@ class Panel_info():
                 l = line.split()
                 l = (''.join(l))
                 l = l.split('=')
+
                 if len(l) >= 2:
+                    if l[0] == "DRIVER_VERSION":
+                        if l[1] == "V2":
+                            self.driver_version = 2
+                            print("DRIVER_VERSION = V2")
+                            continue
+                        elif l[1] == "V1":
+                            self.driver_version = 1
+                            print("DRIVER_VERSION = V1")
+                            continue
+                        else:
+                            self.driver_version = 0
+                            print("driver version was wrong,please check it again!")
+                            break
+                    else:
+                        pass
+
                     if l[0] in PATH_OPCODE:
                         path = l[1]
                         if path[0] != '/':
@@ -90,13 +130,38 @@ class Panel_info():
                         if path[-1] == '/':
                             path = path[:-1]
                         #Assign path
-                        if l[0] == "REG_PATH":
-                            self.REG_PATH = path
-                        elif l[0] == "DIAG_PATH":
-                            self.DIAG_PATH = path
-                        elif l[0] == 'HX_FOLDER_PATH':
-                            self.HX_FOLDER_PATH = path
-                        
+
+                        if self.driver_version == 1:
+                            if l[0] == "REG_PATH":
+                                self.REG_PATH = path
+                                print(self.REG_PATH)
+                            elif l[0] == "DIAG_PATH":
+                                self.DIAG_PATH = path
+                                print(self.DIAG_PATH)
+                            elif l[0] == 'HX_FOLDER_PATH':
+                                self.HX_FOLDER_PATH = path
+                                print(self.HX_FOLDER_PATH)
+                        elif self.driver_version == 2:
+                            if l[0] == "DEBUG_PATH":
+                                self.DEBUG_PATH = path
+                                print(self.DEBUG_PATH)
+                            elif l[0] == "BANKS_PATH":
+                                self.READ_BANKS_PATH = path
+                                print(self.READ_BANKS_PATH)
+                            elif l[0] == "DCS_PATH":
+                                self.READ_DCS_PATH = path
+                                print(self.READ_DCS_PATH)
+                            elif l[0] == "IIRS_PATH":
+                                self.READ_IIRS_PATH = path
+                                print(self.READ_IIRS_PATH)
+                            elif l[0] == "STACK_PATH":
+                                self.READ_STACK_PATH = path
+                                print(self.READ_STACK_PATH)
+                        elif self.driver_version == 0:
+                            print("please set driver version now")
+                        else:
+                            print("please check the DEFINE_SETTING file")
+
     def echo_raw_data(self, diag):
         diag_trigger = self.ECHO_DIAG % (str(diag))
         echo_diag = self.CAT_DIAG
@@ -301,6 +366,7 @@ class ADB_Frame(wx.Frame):
                                 self.PORT_NUM = str(value)
                         elif l[0] == "OTHER_FUNCTION":
                             self.OTHER_FUNCTION_DEFINE = int(value)
+
     def bind_component(self):        
         #Connect Button        
         self.connect_btn = wx.Button(parent = self.panel, label = "Wifi Connect")
@@ -309,13 +375,11 @@ class ADB_Frame(wx.Frame):
         self.disconnect_btn = wx.Button(parent = self.panel, label = "Wifi Disconnect")
         self.Bind(wx.EVT_BUTTON, self.Btn_disconnect_func, self.disconnect_btn)
 
-        
         self.connect_again_btn = wx.Button(parent = self.panel, label = "C", size = (25, 25))
         self.Bind(wx.EVT_BUTTON, self.Btn_connect_again_func, self.connect_again_btn)
 
-        #morgen add
-        self.driver_version = wx.ToggleButton(parent=self.panel, label="Driver V2", size=(60, 25))
-        self.Bind(wx.EVT_TOGGLEBUTTON, self.Btn_driver_version, self.driver_version)
+        self.root_remount = wx.Button(parent=self.panel, label="Root", size=(50, 25))
+        self.Bind(wx.EVT_BUTTON, self.root_remount_func, self.root_remount)
 
         self.wifi_connect_status_text = wx.StaticText(self.panel, label = "Wifi Disconnect")
 
@@ -430,7 +494,7 @@ class ADB_Frame(wx.Frame):
         hsize.Add(self.wifi_connect_status_text, 0, wx.ALIGN_LEFT)
         hsize.AddSpacer(space)
         hsize.Add(self.connect_again_btn, 0, wx.ALIGN_LEFT)
-        hsize.Add(self.driver_version, 0, wx.ALIGN_LEFT)#morgen add
+        hsize.Add(self.root_remount, 0, wx.ALIGN_LEFT)
         self.sizer.Add(hsize, 0, wx.ALIGN_TOP)
         
         self.sizer.AddSpacer(space)
@@ -532,7 +596,20 @@ class ADB_Frame(wx.Frame):
         print (cmd)
         response = (self.adb_tool.shell(cmd))
         print (response)
-        
+
+    def root_remount_func(self, event):
+        cmd = "adb root"
+        self.adb_tool.shell(cmd)
+        cmd = "adb remount"
+        self.adb_tool.shell(cmd)
+        cmd = "adb shell setenforce 0"
+        self.adb_tool.shell(cmd)
+        cmd = "adb shell chmod 777 /proc/android_touch/*"
+        self.adb_tool.shell(cmd)
+        cmd = "adb shell chmod 777 /proc/android_touch/diag/*"
+        self.adb_tool.shell(cmd)
+        print("root, remount, setenforce 0, chmod")
+
     def Btn_raw_data_func(self, event):
         #print ("Click")
         self.panel_info.clear_current_diag()
@@ -592,12 +669,6 @@ class ADB_Frame(wx.Frame):
                 self.data_diag = cus_diag_num
             else:
                 self.data_diag = SRAM_DIFF_DIAG
-    #morgen add
-    def Btn_driver_version(self, event):
-        if self.driver_version.GetValue() == True:
-            print("Select driver V2")
-        else:
-            print("Select driver V1")
 
     def Logging_flag_func(self, event):
         if self.toggle_logging_btn.GetValue() == False:
