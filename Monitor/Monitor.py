@@ -433,7 +433,7 @@ class ADB_Frame(wx.Frame):
         self.Bind(wx.EVT_BUTTON, self.Btn_reboot_func, self.reboot_btn)
         self.check_device_btn = wx.Button(parent = self.panel, label = "Check device")
         self.Bind(wx.EVT_BUTTON, self.Btn_check_device_func, self.check_device_btn)
-            
+
         #other function        
         if (self.OTHER_FUNCTION_DEFINE == 1):
             self.swipe_from_page = wx.TextCtrl( self.panel,

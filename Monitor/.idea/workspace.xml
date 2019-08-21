@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e5191513-33e3-4ab3-99d3-fbfe8e743383" name="Default Changelist" comment="" />
+    <list default="true" id="e5191513-33e3-4ab3-99d3-fbfe8e743383" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Monitor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Monitor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/操作說明.pptx" beforeDir="false" afterPath="$PROJECT_DIR$/操作說明.pptx" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,8 +16,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Monitor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="420" column="8" selection-start-line="420" selection-start-column="8" selection-end-line="420" selection-end-column="8" />
+            <state relative-caret-position="442">
+              <caret line="467" column="45" lean-forward="true" selection-start-line="467" selection-start-column="45" selection-end-line="467" selection-end-column="45" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
                 <element signature="e#708#9965#0" />
@@ -50,8 +53,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DEFINE_SETTING">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="23" column="1" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
+            <state relative-caret-position="95">
+              <caret line="5" column="39" lean-forward="true" selection-start-line="5" selection-start-column="39" selection-end-line="5" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -63,6 +66,7 @@
       <find>READ_DCS_PATH</find>
       <find>read_register</find>
       <find>reg_data</find>
+      <find>morgen</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -162,11 +166,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1753" height="1032" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1341108" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Version Control" weight="0.32962137" />
       <window_info anchor="bottom" id="Python Console" />
       <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.123608015" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
@@ -215,13 +220,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/DEFINE_SETTING">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="23" column="1" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/adb.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
@@ -242,10 +240,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/DEFINE_SETTING">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="39" lean-forward="true" selection-start-line="5" selection-start-column="39" selection-end-line="5" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Monitor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="420" column="8" selection-start-line="420" selection-start-column="8" selection-end-line="420" selection-end-column="8" />
+        <state relative-caret-position="442">
+          <caret line="467" column="45" lean-forward="true" selection-start-line="467" selection-start-column="45" selection-end-line="467" selection-end-column="45" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
             <element signature="e#708#9965#0" />
