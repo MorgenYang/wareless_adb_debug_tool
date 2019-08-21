@@ -27,5 +27,5 @@ STACK_PATH = /proc/android_touch/diag/stack
 ------------------------------------------------------
 HX_FOLDER_PATH = /sdcard/HimaxAPK/tmp
 WRITE_REG_NUM = 5
-OTHER_FUNCTION = 2
+OTHER_FUNCTION = 1
 PORT_NUM = 8888

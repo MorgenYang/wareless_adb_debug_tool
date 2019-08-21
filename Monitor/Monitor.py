@@ -114,8 +114,6 @@ class Panel_info():
                             self.driver_version = 0
                             print("driver version was wrong,please check it again!")
                             break
-                    else:
-                        print("please set driver version!")
 
                     if l[0] in PATH_OPCODE:
                         path = l[1]
@@ -421,9 +419,9 @@ class ADB_Frame(wx.Frame):
                                         size = (160,70),
                                         style = wx.TE_MULTILINE)
         
-        self.reg_data = wx.StaticText(  self.panel,
-                                        label = "0")
-        
+        #self.reg_data = wx.StaticText(self.panel, label = "0") #morgen
+        self.reg_data = wx.TextCtrl(self.panel, size=(440, 90), style=wx.TE_READONLY|wx.TE_MULTILINE)
+
         #Other adb command  
         self.power_key_btn = wx.Button(parent = self.panel, label = "Power key")
         self.Bind(wx.EVT_BUTTON, self.Btn_power_key_func, self.power_key_btn)
@@ -693,8 +691,8 @@ class ADB_Frame(wx.Frame):
             #read only the single line
             reg_info = reg_info[:83] + "\n"
             read_reg_info += reg_info
-        
-        self.reg_data.SetLabel(read_reg_info)           #output return value
+
+        self.reg_data.SetValue(read_reg_info)           #output return value morgen
         
     def Btn_reg_write_func(self, event):
             

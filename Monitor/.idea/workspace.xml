@@ -2,13 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e5191513-33e3-4ab3-99d3-fbfe8e743383" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DEFINE_SETTING" beforeDir="false" afterPath="$PROJECT_DIR$/DEFINE_SETTING" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Monitor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Monitor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Monitor.spec" beforeDir="false" afterPath="$PROJECT_DIR$/Monitor.spec" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/Monitor/Analysis-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/Monitor/Analysis-00.toc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/Monitor/EXE-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/Monitor/EXE-00.toc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/Monitor/PKG-00.pkg" beforeDir="false" afterPath="$PROJECT_DIR$/build/Monitor/PKG-00.pkg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/Monitor/PKG-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/Monitor/PKG-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/Monitor/PYZ-00.pyz" beforeDir="false" afterPath="$PROJECT_DIR$/build/Monitor/PYZ-00.pyz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/Monitor/PYZ-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/Monitor/PYZ-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/Monitor/warn-Monitor.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/Monitor/warn-Monitor.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/Monitor/xref-Monitor.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/Monitor/xref-Monitor.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/DEFINE_SETTING" beforeDir="false" afterPath="$PROJECT_DIR$/dist/DEFINE_SETTING" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/Monitor.exe" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Monitor.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/操作說明.pptx" beforeDir="false" afterPath="$PROJECT_DIR$/操作說明.pptx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,11 +22,99 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Monitor.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="176">
+              <caret line="693" selection-start-line="693" selection-end-line="693" />
+              <folding>
+                <element signature="e#0#37#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/adb.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="171">
+              <caret line="21" column="28" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="28" />
+              <folding>
+                <element signature="e#0#17#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/setup.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="57">
+              <caret line="3" column="13" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DEFINE_SETTING">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="437">
+              <caret line="23" column="1" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>READ_DCS_PATH</find>
+      <find>read_register</find>
+      <find>reg_data</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/setup.py" />
+        <option value="$PROJECT_DIR$/Monitor.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-7" />
+    <option name="width" value="1753" />
+    <option name="height" value="1032" />
+  </component>
   <component name="ProjectId" id="1PggUbUXbrXznB0yxdYzroifQXo" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Monitor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Monitor" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -79,15 +173,98 @@
     </task>
     <servers />
   </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="0" width="1753" height="1032" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Favorites" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1341108" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Python Console" />
+      <window_info anchor="bottom" id="Terminal" weight="0.123608015" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2572383" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/DEFINE_SETTING">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="23" column="1" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="21" column="28" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#17#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Monitor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="693" selection-start-line="693" selection-end-line="693" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>
