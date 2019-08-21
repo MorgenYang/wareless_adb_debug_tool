@@ -40,14 +40,12 @@ class Panel_info():
         self.REG_PATH = ''
         self.HX_FOLDER_PATH = ''
 
-        #morgen add start
         self.DEBUG_PATH = ''
         self.READ_BANKS_PATH = ''
         self.READ_DCS_PATH = ''
         self.READ_IIRS_PATH = ''
         self.READ_STACK_PATH = ''
         self.driver_version = DRIVER_VERSION
-        #morgen add end
 
         self.setting_path()
 
@@ -365,6 +363,8 @@ class ADB_Frame(wx.Frame):
         self.root_remount = wx.Button(parent=self.panel, label="Root", size=(50, 25))
         self.Bind(wx.EVT_BUTTON, self.root_remount_func, self.root_remount)
 
+        self.read_register_length = wx.Choice(parent=self.panel, choices=['12','56','128'], name= "len", size=(50, 25))#morgen
+
         self.wifi_connect_status_text = wx.StaticText(self.panel, label = "Wifi Disconnect")
 
         self.wifi_connect_status_text.SetForegroundColour((255, 0, 0))
@@ -419,7 +419,7 @@ class ADB_Frame(wx.Frame):
                                         size = (160,70),
                                         style = wx.TE_MULTILINE)
         
-        #self.reg_data = wx.StaticText(self.panel, label = "0") #morgen
+        #self.reg_data = wx.StaticText(self.panel, label = "0")
         self.reg_data = wx.TextCtrl(self.panel, size=(440, 90), style=wx.TE_READONLY|wx.TE_MULTILINE)
 
         #Other adb command  
@@ -517,6 +517,8 @@ class ADB_Frame(wx.Frame):
         hsize.Add(self.register_read_btn, 0, wx.ALIGN_LEFT)
         hsize.AddSpacer(space)
         hsize.Add(self.reg_address, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.read_register_length, 0, wx.ALIGN_LEFT)#morgen
         self.sizer.Add(hsize, 0, wx.ALIGN_TOP)
         
         self.sizer.AddSpacer(space)
@@ -692,7 +694,7 @@ class ADB_Frame(wx.Frame):
             reg_info = reg_info[:83] + "\n"
             read_reg_info += reg_info
 
-        self.reg_data.SetValue(read_reg_info)           #output return value morgen
+        self.reg_data.SetValue(read_reg_info)           #output return value
         
     def Btn_reg_write_func(self, event):
             
