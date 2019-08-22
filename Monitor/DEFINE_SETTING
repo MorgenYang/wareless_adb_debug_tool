@@ -4,7 +4,8 @@ DRIVER_VERSION = V2
 ------------------------------------------------------
 DIAG_PATH = /proc/android_touch/diag
 REG_PATH = /proc/android_touch/register
-
+INT_EN_PATH = /proc/android_touch/int_en
+RESET_PATH = /proc/android_touch/reset
 #DIAG_PATH = /proc/touchpanel/diag
 #REG_PATH = /proc/touchpanel/register
 
@@ -25,7 +26,9 @@ STACK_PATH = /proc/android_touch/diag/stack
 
 #COMMON
 ------------------------------------------------------
+SELFTEST_PATH = /proc/android_touch/self_test
+FW_VERSION_PATH = /proc/android_touch/debug
 HX_FOLDER_PATH = /sdcard/HimaxAPK/tmp
 WRITE_REG_NUM = 5
-OTHER_FUNCTION = 2
+OTHER_FUNCTION = 1
 PORT_NUM = 8888
