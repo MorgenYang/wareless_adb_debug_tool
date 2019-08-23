@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e5191513-33e3-4ab3-99d3-fbfe8e743383" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DEFINE_SETTING" beforeDir="false" afterPath="$PROJECT_DIR$/DEFINE_SETTING" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Monitor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Monitor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common_bat_cmd/display_1129.bat" beforeDir="false" afterPath="$PROJECT_DIR$/common_bat_cmd/display_1129.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common_bat_cmd/display_2810.bat" beforeDir="false" afterPath="$PROJECT_DIR$/common_bat_cmd/display_2810.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common_bat_cmd/display_打开背光.bat" beforeDir="false" afterPath="$PROJECT_DIR$/common_bat_cmd/display_打开背光.bat" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,25 +16,21 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Monitor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="202">
+              <caret line="353" column="43" selection-start-line="353" selection-start-column="33" selection-end-line="353" selection-end-column="43" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
+                <element signature="e#245#600#0" />
+                <element signature="e#837#11093#0" />
+                <element signature="e#7038#7983#0" />
+                <element signature="e#8217#8532#0" />
+                <element signature="e#8584#8925#0" />
+                <element signature="e#9022#9447#0" />
+                <element signature="e#9525#9546#0" />
+                <element signature="e#9590#9611#0" />
+                <element signature="e#9663#9829#0" />
+                <element signature="e#10506#10585#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/common_bat_cmd/Touch_senseonoff.bat">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/common_bat_cmd/hide_virtualkey.bat">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="549">
-              <caret line="48" selection-start-line="48" selection-end-line="48" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -55,8 +47,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DEFINE_SETTING">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="8" column="18" selection-start-line="8" selection-end-line="8" selection-end-column="18" />
+            <state>
+              <caret column="19" selection-start-column="19" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dist/needs.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="6" column="9" lean-forward="true" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -65,14 +66,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>function_type</find>
-      <find>adb_function_type</find>
-      <find>touch_btn_func</find>
-      <find>adb_btn</find>
-      <find>display_function_type</find>
-      <find>adb_btn_func</find>
-      <find>OpenPoint</find>
-      <find>HideVirtual</find>
       <find>1129</find>
       <find>ECHO_WRITE_REGISTER</find>
       <find>Reset_1</find>
@@ -95,6 +88,14 @@
       <find>SENSEON</find>
       <find>V1_SENSEONOFF_PATH</find>
       <find>SENSEOFF</find>
+      <find>CAT_READ_REGISTER</find>
+      <find>read_register</find>
+      <find>reg_data_line</find>
+      <find>root</find>
+      <find>adb_Root_func</find>
+      <find>Will be added!</find>
+      <find>adb_ShutDown_func</find>
+      <find>adb_PowerKey_func</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -112,7 +113,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-20" />
-    <option name="width" value="1356" />
+    <option name="width" value="1324" />
     <option name="height" value="1047" />
   </component>
   <component name="ProjectId" id="1PggUbUXbrXznB0yxdYzroifQXo" />
@@ -129,11 +130,6 @@
             <path>
               <item name="Monitor" type="b2602c69:ProjectViewProjectNode" />
               <item name="Monitor" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Monitor" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Monitor" type="462c0819:PsiDirectoryNode" />
-              <item name="common_bat_cmd" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Monitor" type="b2602c69:ProjectViewProjectNode" />
@@ -205,15 +201,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-20" y="0" width="1356" height="1047" extended-state="0" />
-    <editor active="true" />
+    <frame x="-20" y="0" width="1324" height="1047" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17450683" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17884915" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.38554215" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.25301206" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -268,13 +263,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dist/needs.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="4" lean-forward="true" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/common_bat_cmd/Home.bat">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
@@ -310,13 +298,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret selection-end-line="2" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/keyevent">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="25" column="26" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -359,17 +340,41 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DEFINE_SETTING">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="18" selection-start-line="8" selection-end-line="8" selection-end-column="18" />
+        <state>
+          <caret column="19" selection-start-column="19" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/needs.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="9" lean-forward="true" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/keyevent">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="25" column="26" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Monitor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        <state relative-caret-position="202">
+          <caret line="353" column="43" selection-start-line="353" selection-start-column="33" selection-end-line="353" selection-end-column="43" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
+            <element signature="e#245#600#0" />
+            <element signature="e#837#11093#0" />
+            <element signature="e#7038#7983#0" />
+            <element signature="e#8217#8532#0" />
+            <element signature="e#8584#8925#0" />
+            <element signature="e#9022#9447#0" />
+            <element signature="e#9525#9546#0" />
+            <element signature="e#9590#9611#0" />
+            <element signature="e#9663#9829#0" />
+            <element signature="e#10506#10585#0" />
           </folding>
         </state>
       </provider>
