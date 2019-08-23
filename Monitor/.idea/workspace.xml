@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e5191513-33e3-4ab3-99d3-fbfe8e743383" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DEFINE_SETTING" beforeDir="false" afterPath="$PROJECT_DIR$/DEFINE_SETTING" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Monitor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Monitor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common_bat_cmd/display_1129.bat" beforeDir="false" afterPath="$PROJECT_DIR$/common_bat_cmd/display_1129.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common_bat_cmd/display_2810.bat" beforeDir="false" afterPath="$PROJECT_DIR$/common_bat_cmd/display_2810.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common_bat_cmd/display_打开背光.bat" beforeDir="false" afterPath="$PROJECT_DIR$/common_bat_cmd/display_打开背光.bat" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,45 +20,34 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Monitor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="407">
-              <caret line="423" lean-forward="true" selection-start-line="423" selection-end-line="423" />
+            <state relative-caret-position="187">
+              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
-                <element signature="e#730#10240#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dist/needs.txt">
+        <entry file="file://$PROJECT_DIR$/common_bat_cmd/Touch_senseonoff.bat">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/common_bat_cmd/hide_virtualkey.bat">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="2" column="4" lean-forward="true" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+            <state relative-caret-position="549">
+              <caret line="48" selection-start-line="48" selection-end-line="48" selection-end-column="50" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/adb.py">
+        <entry file="file://$PROJECT_DIR$/keyevent">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="22" column="25" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="25" />
-              <folding>
-                <element signature="e#0#17#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/setup.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="3" column="13" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="13" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="310">
+              <caret line="25" column="26" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -62,8 +55,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DEFINE_SETTING">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="608">
-              <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
+            <state relative-caret-position="152">
+              <caret line="8" column="18" selection-start-line="8" selection-end-line="8" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -72,36 +65,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Btn_screen_shot_func</find>
-      <find>pull_hx_file_btn</find>
-      <find>Btn_pull_hx_file_func</find>
-      <find>reboot_btn</find>
-      <find>Btn_reboot_func</find>
-      <find>check_device_btn</find>
-      <find>Btn_check_device_func</find>
-      <find>othersizer</find>
-      <find>sizer</find>
-      <find>ECHO_WRITE_REGISTER</find>
-      <find>CAT_SELFTEST_PATH</find>
-      <find>%</find>
-      <find>ECHO_FW_VERSION</find>
-      <find>FW_VERSION_PATH</find>
-      <find>CAT_FW_VERSION</find>
-      <find>INT_EN_PATH</find>
-      <find>Int_en</find>
-      <find>Reset</find>
-      <find>ECHO_INT_EN</find>
-      <find>setting_frame</find>
-      <find>box_sizer</find>
-      <find>Bind</find>
-      <find>read_register_length</find>
       <find>function_type</find>
-      <find>register_write_btn_list</find>
-      <find>component_arrangement</find>
-      <find>connect_again_btn</find>
-      <find>Btn_connect_again_func</find>
-      <find>connect_btn</find>
-      <find>wifi_connect_status_text</find>
+      <find>adb_function_type</find>
+      <find>touch_btn_func</find>
+      <find>adb_btn</find>
+      <find>display_function_type</find>
+      <find>adb_btn_func</find>
+      <find>OpenPoint</find>
+      <find>HideVirtual</find>
+      <find>1129</find>
+      <find>ECHO_WRITE_REGISTER</find>
+      <find>Reset_1</find>
+      <find>FW_VERSION_PATH</find>
+      <find>setting_path</find>
+      <find>HX_FOLDER_PATH</find>
+      <find>DIAG_PATH</find>
+      <find>REG_PATH</find>
+      <find>INT_EN_PATH</find>
+      <find>RESET_PATH</find>
+      <find>WRITE_REG_NUM</find>
+      <find>READ_BANKS_PATH</find>
+      <find>READ_STACK_PATH</find>
+      <find>DIFF_DIAG</find>
+      <find>CAT_SELFTEST_PATH</find>
+      <find>ECHO_INT_EN</find>
+      <find>DEBUG_PATH</find>
+      <find>ECHO_FW_VERSION</find>
+      <find>loop_run_raw_data</find>
+      <find>SENSEON</find>
+      <find>V1_SENSEONOFF_PATH</find>
+      <find>SENSEOFF</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -110,16 +103,17 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/DEFINE_SETTING" />
         <option value="$PROJECT_DIR$/dist/needs.txt" />
+        <option value="$PROJECT_DIR$/common_bat_cmd/display_1129.bat" />
+        <option value="$PROJECT_DIR$/DEFINE_SETTING" />
         <option value="$PROJECT_DIR$/Monitor.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-7" />
-    <option name="width" value="1328" />
-    <option name="height" value="1032" />
+    <option name="x" value="-20" />
+    <option name="width" value="1356" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectId" id="1PggUbUXbrXznB0yxdYzroifQXo" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -211,21 +205,21 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="1328" height="1032" extended-state="0" />
+    <frame x="-20" y="0" width="1356" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17829457" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17450683" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.24498886" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.38554215" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32962137" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.12249443" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.2343921" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -274,23 +268,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/adb.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="22" column="25" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#17#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DEFINE_SETTING">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dist/needs.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
@@ -298,13 +275,101 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/common_bat_cmd/Home.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common_bat_cmd/adb_Getprop.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common_bat_cmd/cat_interrupts.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="50" lean-forward="true" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="22" column="25" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#17#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common_bat_cmd/open_point_location.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="2" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/keyevent">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="25" column="26" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common_bat_cmd/hide_virtualkey.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="549">
+          <caret line="48" selection-start-line="48" selection-end-line="48" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common_bat_cmd/display_2810.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" selection-start-line="1" selection-end-line="3" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common_bat_cmd/display_1129.bat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" selection-start-line="1" selection-end-line="3" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common_bat_cmd/display_打开背光.bat">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common_bat_cmd/Touch_senseonoff.bat">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DEFINE_SETTING">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="18" selection-start-line="8" selection-end-line="8" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Monitor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="423" lean-forward="true" selection-start-line="423" selection-end-line="423" />
+        <state relative-caret-position="187">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
-            <element signature="e#730#10240#0" />
           </folding>
         </state>
       </provider>

@@ -12,16 +12,23 @@ import sys
 sys.path.append('./include')
 from Replace_bot import Replace_section_flow
 
-PATH_OPCODE = ["REG_PATH",
-               "DIAG_PATH",
+PATH_OPCODE = ["V1_REG_PATH",
+               "V1_DIAG_PATH",
+               "V1_INT_EN_PATH",
+               "V1_RESET_PATH",
+               "V1_SENSEONOFF_PATH",
+
+               "V2_BANKS_PATH",
+               "V2_DCS_PATH",
+               "V2_IIRS_PATH",
+               "V2_STACK_PATH",
+
                "DEBUG_PATH",
-               "BANKS_PATH",
-               "DCS_PATH",
-               "IIRS_PATH",
-               "STACK_PATH",
                "SELFTEST_PATH",
-               "INT_EN_PATH",
+               "FLASH_DUMP_PATH",
                "HX_FOLDER_PATH",
+
+
                "WRITE_REG_NUM",
                "PORT_NUM",
                "OTHER_FUNCTION"]
@@ -38,48 +45,53 @@ DRIVER_VERSION = 0
 class Panel_info():
 
     def __init__(self, adb):
-        # Echo command
-        self.DIAG_PATH = ''
-        self.REG_PATH = ''
-        self.INT_EN_PATH = ''
-        self.RESET_PATH = ''
-        self.HX_FOLDER_PATH = ''
-
+        # common path
         self.DEBUG_PATH = ''
-        self.READ_BANKS_PATH = ''
-
         self.SELFTEST_PATH = ''
-        self.FW_VERSION_PATH = ''
+        self.HX_FOLDER_PATH = ''
+        self.FLASH_DUMP_PATH = ''
 
-        self.READ_DCS_PATH = ''
-        self.READ_IIRS_PATH = ''
-        self.READ_STACK_PATH = ''
+        # common v1 path
+        self.V1_DIAG_PATH = ''
+        self.V1_REG_PATH = ''
+        self.V1_INT_EN_PATH = ''
+        self.V1_RESET_PATH = ''
+        self.V1_SENSEONOFF_PATH = ''
+
+        # common v2 path
+        self.V2_READ_BANKS_PATH = ''
+        self.V2_READ_DCS_PATH = ''
+        self.V2_READ_IIRS_PATH = ''
+        self.V2_READ_STACK_PATH = ''
+
         self.driver_version = DRIVER_VERSION
 
         self.setting_path()
 
         if self.driver_version == 1:
-            self.ECHO_DIAG = "echo %s > " + self.DIAG_PATH
-            self.CAT_DIAG = "cat " + self.DIAG_PATH
-            self.ECHO_WRITE_REGISTER = "echo w:x%s:x%s > " + self.REG_PATH
-            self.ECHO_READ_REGISTER = "echo r:x%s > " + self.REG_PATH
-            self.CAT_READ_REGISTER = "cat " + self.REG_PATH
-            self.ECHO_INT_EN = "echo int_en,%s > " + self.INT_EN_PATH
-            self.ECHO_RESET = "echo reset,%s > " + self.RESET_PATH
+            self.ECHO_DIAG = "echo %s > " + self.V1_DIAG_PATH
+            self.CAT_DIAG = "cat " + self.V1_DIAG_PATH
+            self.ECHO_WRITE_REGISTER = "echo w:x%s:x%s > " + self.V1_REG_PATH
+            self.ECHO_READ_REGISTER = "echo r:x%s > " + self.V1_REG_PATH
+            self.CAT_READ_REGISTER = "cat " + self.V1_REG_PATH
+            self.ECHO_INT_EN = "echo %s > " + self.V1_INT_EN_PATH
+            self.ECHO_RESET = "echo %s > " + self.V1_RESET_PATH
+            self.SENSEON = "echo 1 > " + self.V1_SENSEONOFF_PATH
+            self.SENSEOFF = "echo 0 > " + self.V1_SENSEONOFF_PATH
         elif self.driver_version == 2:
             self.ECHO_DIAG = "echo diag,%s > " + self.DEBUG_PATH
-            self.CAT_DIAG = "cat " + self.READ_STACK_PATH
+            self.CAT_DIAG = "cat " + self.V2_READ_STACK_PATH
             self.ECHO_WRITE_REGISTER = "echo register,w:x%s:x%s > " + self.DEBUG_PATH
             self.ECHO_READ_REGISTER = "echo register,r:x%s > " + self.DEBUG_PATH
             self.CAT_READ_REGISTER = "cat " + self.DEBUG_PATH
             self.ECHO_INT_EN = "echo int_en,%s > " + self.DEBUG_PATH
             self.ECHO_RESET = "echo reset,%s > " + self.DEBUG_PATH
-        elif self.driver_version == 0:
-            pass
+            self.SENSEON = "echo senseonoff,1 > " + self.DEBUG_PATH
+            self.SENSEOFF = "echo senseonoff,0 > " + self.DEBUG_PATH
 
-        self.CAT_SELFTEST_PATH = "cat " + self.SELFTEST_PATH
-        self.ECHO_FW_VERSION = "echo %s > " + self.FW_VERSION_PATH
-        self.CAT_FW_VERSION = "cat " + self.FW_VERSION_PATH
+        self.CAT_SELFTEST = "cat " + self.SELFTEST_PATH
+        self.ECHO_FW_VERSION = "echo %s > " + self.DEBUG_PATH
+        self.CAT_FW_VERSION = "cat " + self.DEBUG_PATH
 
         self.PULL_HX_FILE = "adb pull " + self.HX_FOLDER_PATH
 
@@ -137,36 +149,39 @@ class Panel_info():
                         if path[-1] == '/':
                             path = path[:-1]
                         # Assign path
+                        print(l)
                         # common
                         if l[0] == "DEBUG_PATH":
                             self.DEBUG_PATH = path
-                            self.FW_VERSION_PATH = path
                         elif l[0] == 'SELFTEST_PATH':
                             self.SELFTEST_PATH = path
-                        # v2 or v2
+                        elif l[0] == 'FLASH_DUMP_PATH':
+                            self.FLASH_DUMP_PATH = path
+                        elif l[0] == 'HX_FOLDER_PATH':
+                            self.HX_FOLDER_PATH = path
+
+                        # v1 or v2
                         if self.driver_version == 1:
-                            if l[0] == "REG_PATH":
-                                self.REG_PATH = path
-                            elif l[0] == "DIAG_PATH":
-                                self.DIAG_PATH = path
-                            elif l[0] == 'HX_FOLDER_PATH':
-                                self.HX_FOLDER_PATH = path
-                            elif l[0] == 'INT_EN_PATH':
-                                self.INT_EN_PATH = path
-                            elif l[0] == 'RESET_PATH':
-                                self.RESET_PATH = path
+                            if l[0] == "V1_REG_PATH":
+                                self.V1_REG_PATH = path
+                            elif l[0] == "V1_DIAG_PATH":
+                                self.V1_DIAG_PATH = path
+                            elif l[0] == 'V1_INT_EN_PATH':
+                                self.V1_INT_EN_PATH = path
+                            elif l[0] == 'V1_RESET_PATH':
+                                self.V1_RESET_PATH = path
+                            elif l[0] == 'V1_SENSEONOFF_PATH':
+                                self.V1_SENSEONOFF_PATH = path
 
                         elif self.driver_version == 2:
-                            if l[0] == "BANKS_PATH":
-                                self.READ_BANKS_PATH = path
-                            elif l[0] == "DCS_PATH":
-                                self.READ_DCS_PATH = path
-                            elif l[0] == "IIRS_PATH":
-                                self.READ_IIRS_PATH = path
-                            elif l[0] == "STACK_PATH":
-                                self.READ_STACK_PATH = path
-                        elif self.driver_version == 0:
-                            print("please set driver version now")
+                            if l[0] == "V2_BANKS_PATH":
+                                self.V2_READ_BANKS_PATH = path
+                            elif l[0] == "V2_DCS_PATH":
+                                self.V2_READ_DCS_PATH = path
+                            elif l[0] == "V2_IIRS_PATH":
+                                self.V2_READ_IIRS_PATH = path
+                            elif l[0] == "V2_STACK_PATH":
+                                self.V2_READ_STACK_PATH = path
                         else:
                             print("please check the DEFINE_SETTING file")
 
@@ -315,7 +330,7 @@ class ADB_Frame(wx.Frame):
 
     def __init__(self):
         print("Create ADB GUI")
-        wx.Frame.__init__(self, parent=None, title="ADB monitor 1.0.1", size=(580, 500))
+        wx.Frame.__init__(self, parent=None, title="ADB monitor 1.0.1", size=(450, 600))
         self.counter = 1000
         self.device_ip = ""
         self.device_ip_port = ""
@@ -458,24 +473,56 @@ class ADB_Frame(wx.Frame):
             self.Bind(wx.EVT_BUTTON, self.Btn_run_replace_func, self.replace_run_btn)
 
         # for expend command
-        self.execute_btn = wx.Button(parent=self.panel, label="Execute", size=(50, 30))
-        self.Bind(wx.EVT_BUTTON, self.execute_btn_func, self.execute_btn)
-        self.function_type = wx.Choice(parent=self.panel,
+        self.adb_btn = wx.Button(parent=self.panel, label="ADB", size=(50, 26))
+        self.Bind(wx.EVT_BUTTON, self.adb_btn_func, self.adb_btn)
+        self.adb_function_type = wx.Choice(parent=self.panel,
                                        choices=['Root',
                                                 'ShutDown',
                                                 'PowerKey',
                                                 'ScreenShot',
                                                 'Reboot',
                                                 'CheckDevice',
+                                                'Home',
+                                                'Back',
+                                                'Vol_up',
+                                                'Vol_down',
+                                                'Getprop',
+                                                'Interrupts',
+                                                'Kmsg',
+                                                'Getevent',
+                                                'HideVirtual',
+                                                'ShowVirtual',
+                                                'OpenPoint',
+                                                'ClosePoint',
+                                                'PullHXFile'],
+                                       name="len",
+                                       size=(80, 26))
+
+        self.touch_btn = wx.Button(parent=self.panel, label="Touch", size=(50, 26))
+        self.Bind(wx.EVT_BUTTON, self.touch_btn_func, self.touch_btn)
+        self.touch_function_type = wx.Choice(parent=self.panel,
+                                       choices=['DiagArr',
+                                                'FlashDump',
+                                                'UpdateFW',
+                                                'SenseOn',
+                                                'SenseOff',
                                                 'SelfTest',
                                                 'FWVersion',
                                                 'Reset_1',
                                                 'Reset_4',
                                                 'Int_en_0',
-                                                'Int_en_1',
-                                                'PullHXFile'],
+                                                'Int_en_1'],
                                        name="len",
-                                       size=(80, 35))
+                                       size=(80, 26))
+
+        self.display_btn = wx.Button(parent=self.panel, label="Display", size=(50, 26))
+        self.Bind(wx.EVT_BUTTON, self.display_btn_func, self.display_btn)
+        self.display_function_type = wx.Choice(parent=self.panel,
+                                       choices=['1129',
+                                                '2810',
+                                                'OpenBLight'],
+                                       name="len",
+                                       size=(80, 27))
 
     def component_arrangement(self):
         space = 10
@@ -529,7 +576,7 @@ class ADB_Frame(wx.Frame):
             self.sizer.AddSpacer(space)
 
         hsize = wx.BoxSizer(wx.HORIZONTAL)
-        hsize.Add(self.register_read_btn, 0, wx.ALIGN_LEFT)
+        hsize.Add(self.register_read_btn, 0, wx.ALIGN_CENTER_VERTICAL)
         hsize.AddSpacer(space)
         hsize.Add(self.reg_address, 0, wx.ALIGN_LEFT)
         self.sizer.Add(hsize, 0, wx.ALIGN_TOP)
@@ -542,20 +589,20 @@ class ADB_Frame(wx.Frame):
 
         self.sizer.AddSpacer(space)
 
-        hsize = wx.BoxSizer(wx.HORIZONTAL)
-        hsize.Add(self.execute_btn, 0, wx.ALIGN_LEFT)
-        hsize.Add(self.function_type, 0, wx.ALIGN_LEFT)  # morgen
-        self.sizer.Add(hsize, 0, wx.ALIGN_TOP)
-
         # for common adb command
-        hsize = wx.BoxSizer(wx.VERTICAL)
-        self.sizer.Add(hsize, 0, wx.ALIGN_TOP)
-
+        hsize = wx.BoxSizer(wx.HORIZONTAL)
+        hsize.Add(self.adb_btn, 0, wx.ALIGN_LEFT)
+        hsize.Add(self.adb_function_type, 0, wx.ALIGN_LEFT)  # morgen
+        hsize.AddSpacer(space)
         # for driver debug node
-        hsize = wx.BoxSizer(wx.VERTICAL)
+        hsize.Add(self.touch_btn, 0, wx.ALIGN_LEFT)
+        hsize.Add(self.touch_function_type, 0, wx.ALIGN_LEFT)  # morgen
+        hsize.AddSpacer(space)
+        # for display scripts
+        hsize.Add(self.display_btn, 0, wx.ALIGN_LEFT)
+        hsize.Add(self.display_function_type, 0, wx.ALIGN_LEFT)  # morgen
         self.sizer.Add(hsize, 0, wx.ALIGN_TOP)
 
-        # for display scripts
         hsize = wx.BoxSizer(wx.VERTICAL)
         self.sizer.Add(hsize, 0, wx.ALIGN_TOP)
 
@@ -600,8 +647,8 @@ class ADB_Frame(wx.Frame):
         response = (self.adb_tool.shell(cmd))
         print(response)
 
-    def execute_btn_func(self, event):
-        selection = self.function_type.GetStringSelection()
+    def adb_btn_func(self, event):
+        selection = self.adb_function_type.GetStringSelection()
         if selection == 'Root':
             self.adb_tool.shell("adb root")
             self.adb_tool.shell("adb remount")
@@ -626,8 +673,46 @@ class ADB_Frame(wx.Frame):
         elif selection == 'CheckDevice':
             res = self.adb_tool.shell("adb devices")
             print(res)
-        elif selection == 'SelfTest':
-            ret = self.adb_tool.shell(self.panel_info.CAT_SELFTEST_PATH, "SHELL")
+
+        elif selection == 'Home':
+            self.adb_tool.shell("adb shell input keyevent KEYCODE_HOME")
+        elif selection == 'Back':
+            self.adb_tool.shell("adb shell input keyevent KEYCODE_BACK")
+        elif selection == 'Vol_up':
+            self.adb_tool.shell("adb shell input keyevent KEYCODE_VOLUME_UP")
+        elif selection == 'Vol_down':
+            self.adb_tool.shell("adb shell input keyevent KEYCODE_VOLUME_DOWN")
+        elif selection == 'Getprop':
+            ret = self.adb_tool.shell("adb shell getprop")
+            print(ret)
+        elif selection == 'Interrupts':
+            ret = self.adb_tool.shell("adb shell cat /proc/interrupts")
+            print(ret)
+        elif selection == 'Kmsg':
+            ret = self.adb_tool.keep_listen_shell("adb shell cat /dev/kmsg")
+            print(ret)
+        elif selection == 'Getevent':
+            ret = self.adb_tool.keep_listen_shell("adb shell getevent -lr")
+            print(ret)
+        elif selection == 'HideVirtual':
+            self.adb_tool.shell("adb shell settings put global policy_control immersive.full=*")
+        elif selection == 'ShowVirtual':
+            self.adb_tool.shell("adb shell settings put global policy_control null")
+        elif selection == 'OpenPoint':
+            self.adb_tool.shell("settings put system pointer_location 1", "SHELL")
+            self.adb_tool.shell("settings put system show_touches 1", "SHELL")
+        elif selection == 'ClosePoint':
+            self.adb_tool.shell("settings put system pointer_location 0", "SHELL")
+            self.adb_tool.shell("settings put system show_touches 0", "SHELL")
+        elif selection == 'PullHXFile':
+            print("Pull HX File...")
+            feed_back = self.panel_info.pull_hx_file()
+            print(feed_back)
+
+    def touch_btn_func(self, event):
+        selection = self.touch_function_type.GetStringSelection()
+        if selection == 'SelfTest':
+            ret = self.adb_tool.shell(self.panel_info.CAT_SELFTEST, "SHELL")
             print(ret)
         elif selection == 'FWVersion':
             self.adb_tool.shell(self.panel_info.ECHO_FW_VERSION % "v", "SHELL")
@@ -643,10 +728,42 @@ class ADB_Frame(wx.Frame):
             self.adb_tool.shell(self.panel_info.ECHO_INT_EN % "0", "SHELL")
         elif selection == 'Int_en_1':
             self.adb_tool.shell(self.panel_info.ECHO_INT_EN % "1", "SHELL")
-        elif selection == 'PullHXFile':
-            print("Pull HX File...")
-            feed_back = self.panel_info.pull_hx_file()
-            print(feed_back)
+        elif selection == 'SenseOn':
+            self.adb_tool.shell(self.panel_info.SENSEON, "SHELL")
+        elif selection == 'SenseOff':
+            self.adb_tool.shell(self.panel_info.SENSEOFF, "SHELL")
+            print(self.panel_info.SENSEOFF)
+        elif selection == 'FlashDump':
+            print("Will be added!")
+        elif selection == 'UpdateFW':
+            print("Will be added!")
+        elif selection == 'DiagArr':
+            print("Will be added!")
+
+    def display_btn_func(self, event):
+        selection = self.display_function_type.GetStringSelection()
+        if selection == '1129':
+            print("1129")
+            if self.panel_info.driver_version == 1:
+                self.adb_tool.shell("echo w:x30011000 > " + self.panel_info.V1_REG_PATH, "SHELL")
+                self.adb_tool.shell("sleep 1", "SHELL")
+                self.adb_tool.shell("echo w:x30029000 > " + self.panel_info.V1_REG_PATH, "SHELL")
+            elif self.panel_info.driver_version == 2:
+                self.adb_tool.shell("echo register,w:x30011000 > " + self.panel_info.DEBUG_PATH, "SHELL")
+                self.adb_tool.shell("sleep 1", "SHELL")
+                self.adb_tool.shell("echo register,w:x30029000 > " + self.panel_info.DEBUG_PATH, "SHELL")
+        elif selection == '2810':
+            print("2810")
+            if self.panel_info.driver_version == 1:
+                self.adb_tool.shell("echo w:x30028000 > " + self.panel_info.V1_REG_PATH, "SHELL")
+                self.adb_tool.shell("sleep 1", "SHELL")
+                self.adb_tool.shell("echo w:x30010000 > " + self.panel_info.V1_REG_PATH, "SHELL")
+            elif self.panel_info.driver_version == 2:
+                self.adb_tool.shell("echo register,w:x30028000 > " + self.panel_info.DEBUG_PATH, "SHELL")
+                self.adb_tool.shell("sleep 1", "SHELL")
+                self.adb_tool.shell("echo register,w:x30010000 > " + self.panel_info.DEBUG_PATH, "SHELL")
+        elif selection == 'OpenBLight':
+            print("Will be added!")
 
     def Btn_raw_data_func(self, event):
         # print ("Click")

@@ -1,34 +1,32 @@
-DRIVER_VERSION = V2
+DRIVER_VERSION = V1
 
 #DRIVER V1
 ------------------------------------------------------
-DIAG_PATH = /proc/android_touch/diag
-REG_PATH = /proc/android_touch/register
-INT_EN_PATH = /proc/android_touch/int_en
-RESET_PATH = /proc/android_touch/reset
-#DIAG_PATH = /proc/touchpanel/diag
-#REG_PATH = /proc/touchpanel/register
+V1_DIAG_PATH = /proc/android_touch/diag
+V1_REG_PATH = /proc/android_touch/register
+V1_INT_EN_PATH = /proc/android_touch/int_en
+V1_RESET_PATH = /proc/android_touch/reset
+V1_SENSEONOFF_PATH = /proc/android_touch/SenseOnOff
 
-#DIAG_PATH = /proc/touchpanel/debug_info/himax/diag
-#REG_PATH = /proc/touchpanel/debug_info/himax/register
+#V1_DIAG_PATH = /proc/touchpanel/debug_info/himax/diag
+#V1_REG_PATH = /proc/touchpanel/debug_info/himax/register
 
-#DIAG_PATH = /d/himax_debug_seq/diag
-#REG_PATH = /sys/himax_debug/register
 
 #DRIVER V2
 ------------------------------------------------------
-DEBUG_PATH = /proc/android_touch/debug
-STACK_PATH = /proc/android_touch/diag/stack
+V2_STACK_PATH = /proc/android_touch/diag/stack
 
-#BANKS_PATH = /proc/android_touch/diag/bank_s
-#DCS_PATH = /proc/android_touch/diag/dc_s
-#IIRS_PATH = /proc/android_touch/diag/iir_s
+#V2_BANKS_PATH = /proc/android_touch/diag/bank_s
+#V2_DCS_PATH = /proc/android_touch/diag/dc_s
+#V2_IIRS_PATH = /proc/android_touch/diag/iir_s
 
 #COMMON
 ------------------------------------------------------
 SELFTEST_PATH = /proc/android_touch/self_test
-FW_VERSION_PATH = /proc/android_touch/debug
+DEBUG_PATH = /proc/android_touch/debug
+FLASH_DUMP_PATH = /proc/android_touch/flash_dump
 HX_FOLDER_PATH = /sdcard/HimaxAPK/tmp
+
 WRITE_REG_NUM = 5
 OTHER_FUNCTION = 1
 PORT_NUM = 8888

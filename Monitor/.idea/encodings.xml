@@ -2,6 +2,7 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/Monitor.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common_bat_cmd/hide_virtualkey.bat" charset="GBK" />
     <file url="PROJECT" charset="GBK" />
   </component>
 </project>
