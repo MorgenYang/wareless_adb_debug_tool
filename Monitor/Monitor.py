@@ -332,7 +332,7 @@ class ADB_Frame(wx.Frame):
 
     def __init__(self):
         print("Create ADB GUI")
-        wx.Frame.__init__(self, parent=None, title="ADB monitor 1.0.1", size=(450, 600))
+        wx.Frame.__init__(self, parent=None, title="ADB monitor 1.0.1", size=(450, 650))
         self.counter = 1000
         self.device_ip = ""
         self.device_ip_port = ""
@@ -351,13 +351,13 @@ class ADB_Frame(wx.Frame):
         helpm = wx.Menu()
 
         # ADB
-        adbRoot = adbm.Append(wx.ID_DEFAULT, "Root")
+        """adbRoot = adbm.Append(wx.ID_DEFAULT, "Root")
         self.Bind(wx.EVT_MENU, self.adb_Root_func, adbRoot)
         adbShutDown = adbm.Append(wx.ID_DEFAULT, "ShutDown")
         self.Bind(wx.EVT_MENU, self.adb_ShutDown_func, adbShutDown)
         adbPowerKey = adbm.Append(wx.ID_DEFAULT, "PowerKey")
         self.Bind(wx.EVT_MENU, self.adb_PowerKey_func, adbPowerKey)
-        """adbScreenShot = adbm.Append(wx.ID_DEFAULT, "ScreenShot")
+        adbScreenShot = adbm.Append(wx.ID_DEFAULT, "ScreenShot")
         self.Bind(wx.EVT_MENU, self.adb_ScreenShot_func, adbScreenShot)
         adbReboot = adbm.Append(wx.ID_DEFAULT, "Reboot")
         self.Bind(wx.EVT_MENU, self.adb_Reboot_func, adbReboot)
@@ -468,7 +468,6 @@ class ADB_Frame(wx.Frame):
 
         # Wifi connect
         self.wifi_connect_status = 0
-
 
     def About(self, e):
         description = "Author:Morgen\n" \
@@ -743,7 +742,7 @@ class ADB_Frame(wx.Frame):
         response = (self.adb_tool.shell(cmd))
         print(response)
 
-    def adb_Root_func(self,e):
+    """def adb_Root_func(self,e):
         self.adb_tool.shell("adb root")
         self.adb_tool.shell("adb remount")
         self.adb_tool.shell("adb shell setenforce 0")
@@ -757,7 +756,7 @@ class ADB_Frame(wx.Frame):
     def adb_PowerKey_func(self,e):
         self.adb_tool.shell(None, "KEYEVENT", 26)
 
-    """def adb_ScreenShot_func(self,e):
+    def adb_ScreenShot_func(self,e):
         print("Screen Shot...")
         name = time.strftime("%Y%m%d_%H-%M-%S", time.localtime()) + ".png"
         cmd = "adb wait-for-device shell screencap -p /sdcard/%s" % (name)

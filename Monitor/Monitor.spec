@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['Monitor.py'],
-             pathex=['D:\\gitadbwarelesstool\\Monitor'],
+             pathex=['D:\\adbmonitor\\Monitor'],
              binaries=[],
              datas=[],
              hiddenimports=[],
