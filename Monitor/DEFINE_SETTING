@@ -30,5 +30,7 @@ HX_FOLDER_PATH = /sdcard/HimaxAPK/tmp
 FW_PATH = /vendor/firmware/Himax_firmware.bin
 
 WRITE_REG_NUM = 5
-OTHER_FUNCTION = 1
+
+# 15
+OTHER_FUNCTION = 15
 PORT_NUM = 8888
