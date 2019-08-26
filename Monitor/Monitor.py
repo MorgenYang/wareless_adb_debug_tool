@@ -18,6 +18,7 @@ PATH_OPCODE = ["V1_REG_PATH",
                "V1_INT_EN_PATH",
                "V1_RESET_PATH",
                "V1_SENSEONOFF_PATH",
+               "V1_DIAGARR_PATH",
 
                "V2_BANKS_PATH",
                "V2_DCS_PATH",
@@ -28,6 +29,7 @@ PATH_OPCODE = ["V1_REG_PATH",
                "SELFTEST_PATH",
                "FLASH_DUMP_PATH",
                "HX_FOLDER_PATH",
+               "FW_PATH",
 
 
                "WRITE_REG_NUM",
@@ -35,6 +37,7 @@ PATH_OPCODE = ["V1_REG_PATH",
                "OTHER_FUNCTION"]
 
 DEFINE_FILE = "./DEFINE_SETTING"
+HISTORY_FILE = "./HISTORY"
 
 DIFF_DIAG = 1
 DC_DIAG = 2
@@ -51,6 +54,8 @@ class Panel_info():
         self.SELFTEST_PATH = ''
         self.HX_FOLDER_PATH = ''
         self.FLASH_DUMP_PATH = ''
+        self.FW_PATH = ''
+        self.HISTORY_VALUE = []
 
         # common v1 path
         self.V1_DIAG_PATH = ''
@@ -58,6 +63,7 @@ class Panel_info():
         self.V1_INT_EN_PATH = ''
         self.V1_RESET_PATH = ''
         self.V1_SENSEONOFF_PATH = ''
+        self.V1_DIAGARR_PATH = ''
 
         # common v2 path
         self.V2_READ_BANKS_PATH = ''
@@ -119,6 +125,19 @@ class Panel_info():
         diag_trigger = self.ECHO_DIAG % (str(0))
         self.adb.shell(diag_trigger, "SHELL")
 
+    def read_register_history(self):
+        self.HISTORY_VALUE = []
+        with open(HISTORY_FILE, 'rb') as r:
+            for line in r.readlines():
+                self.HISTORY_VALUE.append(line)
+
+
+    def write_register_history(self, cmd):
+        f = open(HISTORY_FILE, 'a+')
+        f.write(cmd)
+        f.close()
+
+
     def setting_path(self):
         with open(DEFINE_FILE, 'rb') as r:
             for line in r.readlines():
@@ -160,6 +179,8 @@ class Panel_info():
                             self.FLASH_DUMP_PATH = path
                         elif l[0] == 'HX_FOLDER_PATH':
                             self.HX_FOLDER_PATH = path
+                        elif l[0] == 'FW_PATH':
+                            self.FW_PATH = path
 
                         # v1 or v2
                         if self.driver_version == 1:
@@ -173,6 +194,8 @@ class Panel_info():
                                 self.V1_RESET_PATH = path
                             elif l[0] == 'V1_SENSEONOFF_PATH':
                                 self.V1_SENSEONOFF_PATH = path
+                            elif l[0] == 'V1_DIAGARR_PATH':
+                                self.V1_DIAGARR_PATH = path
 
                         elif self.driver_version == 2:
                             if l[0] == "V2_BANKS_PATH":
@@ -332,11 +355,13 @@ class ADB_Frame(wx.Frame):
 
     def __init__(self):
         print("Create ADB GUI")
-        wx.Frame.__init__(self, parent=None, title="ADB monitor 1.0.1", size=(450, 650))
+        wx.Frame.__init__(self, parent=None, title="ADB monitor 1.0.1", size=(600, 900))
         self.counter = 1000
         self.device_ip = ""
         self.device_ip_port = ""
         self.Centre()
+        self.update_tool_ui = 0
+
         self.OTHER_FUNCTION_DEFINE = 0
         self.WRITE_REG_NUM = 0
         self.PORT_NUM = "5555"
@@ -349,79 +374,6 @@ class ADB_Frame(wx.Frame):
         touchm = wx.Menu()
         displaym = wx.Menu()
         helpm = wx.Menu()
-
-        # ADB
-        """adbRoot = adbm.Append(wx.ID_DEFAULT, "Root")
-        self.Bind(wx.EVT_MENU, self.adb_Root_func, adbRoot)
-        adbShutDown = adbm.Append(wx.ID_DEFAULT, "ShutDown")
-        self.Bind(wx.EVT_MENU, self.adb_ShutDown_func, adbShutDown)
-        adbPowerKey = adbm.Append(wx.ID_DEFAULT, "PowerKey")
-        self.Bind(wx.EVT_MENU, self.adb_PowerKey_func, adbPowerKey)
-        adbScreenShot = adbm.Append(wx.ID_DEFAULT, "ScreenShot")
-        self.Bind(wx.EVT_MENU, self.adb_ScreenShot_func, adbScreenShot)
-        adbReboot = adbm.Append(wx.ID_DEFAULT, "Reboot")
-        self.Bind(wx.EVT_MENU, self.adb_Reboot_func, adbReboot)
-        adbCheckDevice = adbm.Append(wx.ID_DEFAULT, "CheckDevice")
-        self.Bind(wx.EVT_MENU, self.adb_CheckDevice_func, adbCheckDevice)
-        adbHome = adbm.Append(wx.ID_DEFAULT, "Home")
-        self.Bind(wx.EVT_MENU, self.adb_Home_func, adbHome)
-        adbBack = adbm.Append(wx.ID_DEFAULT, "Back")
-        self.Bind(wx.EVT_MENU, self.adb_Back_func, adbBack)
-        adbVol_up = adbm.Append(wx.ID_DEFAULT, "Vol_up")
-        self.Bind(wx.EVT_MENU, self.adb_Vol_up_func, adbVol_up)
-        adbVol_down = adbm.Append(wx.ID_DEFAULT, "Vol_down")
-        self.Bind(wx.EVT_MENU, self.adb_Vol_down_func, adbVol_down)
-        adbGetprop = adbm.Append(wx.ID_DEFAULT, "Getprop")
-        self.Bind(wx.EVT_MENU, self.adb_Getprop_func, adbGetprop)
-        adbInterrupts = adbm.Append(wx.ID_DEFAULT, "Interrupts")
-        self.Bind(wx.EVT_MENU, self.adb_Interrupts_func, adbInterrupts)
-        adbKmsg = adbm.Append(wx.ID_DEFAULT, "Kmsg")
-        self.Bind(wx.EVT_MENU, self.adb_Kmsg_func, adbKmsg)
-        adbGetevent = adbm.Append(wx.ID_DEFAULT, "Getevent")
-        self.Bind(wx.EVT_MENU, self.adb_Getevent_func, adbGetevent)
-        adbHideVirtual = adbm.Append(wx.ID_DEFAULT, "HideVirtual")
-        self.Bind(wx.EVT_MENU, self.adb_HideVirtual_func, adbHideVirtual)
-        adbShowVirtual = adbm.Append(wx.ID_DEFAULT, "ShowVirtual")
-        self.Bind(wx.EVT_MENU, self.adb_ShowVirtual_func, adbShowVirtual)
-        adbOpenPoint = adbm.Append(wx.ID_DEFAULT, "OpenPoint")
-        self.Bind(wx.EVT_MENU, self.adb_OpenPoint_func, adbOpenPoint)
-        adbClosePoint = adbm.Append(wx.ID_DEFAULT, "ClosePoint")
-        self.Bind(wx.EVT_MENU, self.adb_ClosePoint_func, adbClosePoint)
-        adbPullHXFile = adbm.Append(wx.ID_DEFAULT, "PullHXFile")
-        self.Bind(wx.EVT_MENU, self.adb_PullHXFile_func, adbPullHXFile)
-
-
-        # TOUCH
-        touchDiagArr = touchm.Append(wx.ID_DEFAULT, "DiagArr")
-        self.Bind(wx.EVT_MENU, self.touch_DiagArr_func, touchDiagArr)
-        touchFlashDump = touchm.Append(wx.ID_DEFAULT, "FlashDump")
-        self.Bind(wx.EVT_MENU, self.touch_FlashDump_func, touchFlashDump)
-        touchUpdateFW = touchm.Append(wx.ID_DEFAULT, "UpdateFW")
-        self.Bind(wx.EVT_MENU, self.touch_UpdateFW_func, touchUpdateFW)
-        touchSenseOn = touchm.Append(wx.ID_DEFAULT, "SenseOn")
-        self.Bind(wx.EVT_MENU, self.touch_SenseOn_func, touchSenseOn)
-        touchSenseOff = touchm.Append(wx.ID_DEFAULT, "SenseOff")
-        self.Bind(wx.EVT_MENU, self.touch_SenseOff_func, touchSenseOff)
-        touchSelfTest = touchm.Append(wx.ID_DEFAULT, "SelfTest")
-        self.Bind(wx.EVT_MENU, self.touch_SelfTest_func, touchSelfTest)
-        touchFWVersion = touchm.Append(wx.ID_DEFAULT, "FWVersion")
-        self.Bind(wx.EVT_MENU, self.touch_FWVersion_func, touchFWVersion)
-        touchReset_1 = touchm.Append(wx.ID_DEFAULT, "Reset_1")
-        self.Bind(wx.EVT_MENU, self.touch_Reset_1_func, touchReset_1)
-        touchReset_4 = touchm.Append(wx.ID_DEFAULT, "Reset_4")
-        self.Bind(wx.EVT_MENU, self.touch_Reset_4_func, touchReset_4)
-        touchInt_en_0 = touchm.Append(wx.ID_DEFAULT, "Int_en_0")
-        self.Bind(wx.EVT_MENU, self.touch_Int_en_0_func, touchInt_en_0)
-        touchInt_en_1 = touchm.Append(wx.ID_DEFAULT, "Int_en_1")
-        self.Bind(wx.EVT_MENU, self.touch_Int_en_1_func, touchInt_en_1)
-
-        # display
-        display1129 = displaym.Append(wx.ID_DEFAULT, "1129")
-        self.Bind(wx.EVT_MENU, self.display_1129_func, display1129)
-        display2810 = displaym.Append(wx.ID_DEFAULT, "2810")
-        self.Bind(wx.EVT_MENU, self.display_2810_func, display2810)
-        displayOpenBLight = displaym.Append(wx.ID_DEFAULT, "OpenBLight")
-        self.Bind(wx.EVT_MENU, self.display_OpenBLight_func, displayOpenBLight)"""
 
         helpAbout = helpm.Append(wx.ID_ABOUT, "About")
         self.Bind(wx.EVT_MENU, self.About, helpAbout)
@@ -479,6 +431,8 @@ class ADB_Frame(wx.Frame):
         info.SetWebSite('http://10.240.233.75/Android%20Driver')
         wx.adv.AboutBox(info)
 
+
+
     def setting_frame(self):
         with open(DEFINE_FILE, 'rb') as r:
             for line in r.readlines():
@@ -500,7 +454,90 @@ class ADB_Frame(wx.Frame):
                             self.OTHER_FUNCTION_DEFINE = int(value)
 
     def bind_component(self):
+        # for adb cmd buttons
+        self.adb_btn_title = wx.StaticText(self.panel, label="ADB cmd")
+        self.adb_btn_title.SetForegroundColour((0, 0, 255))
+        self.adb_btn_root = wx.Button(parent=self.panel, label="Root", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.adb_Root_func, self.adb_btn_root)
+        self.adb_btn_shutdown = wx.Button(parent=self.panel, label="ShutDown", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.adb_ShutDown_func, self.adb_btn_shutdown)
+        self.adb_btn_powerkey = wx.Button(parent=self.panel, label="PowerKey", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.adb_PowerKey_func, self.adb_btn_powerkey)
+        self.adb_btn_screenshot = wx.Button(parent=self.panel, label="ScreenShot", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.adb_ScreenShot_func, self.adb_btn_screenshot)
+        self.adb_btn_reboot = wx.Button(parent=self.panel, label="Reboot", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.adb_Reboot_func, self.adb_btn_reboot)
+        self.adb_btn_checkdevice = wx.Button(parent=self.panel, label="CheckDevice", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.adb_CheckDevice_func, self.adb_btn_checkdevice)
+        self.adb_btn_home = wx.Button(parent=self.panel, label="Home", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.adb_Home_func, self.adb_btn_home)
+        self.adb_btn_back = wx.Button(parent=self.panel, label="Back", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.adb_Back_func, self.adb_btn_back)
+        self.adb_btn_volup = wx.Button(parent=self.panel, label="Vol_up", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.adb_Vol_up_func, self.adb_btn_volup)
+        self.adb_btn_voldown = wx.Button(parent=self.panel, label="Vol_down", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.adb_Vol_down_func, self.adb_btn_voldown)
+        self.adb_btn_getprop = wx.Button(parent=self.panel, label="Getprop", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.adb_Getprop_func, self.adb_btn_getprop)
+        self.adb_btn_interrupts = wx.Button(parent=self.panel, label="Interrupts", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.adb_Interrupts_func, self.adb_btn_interrupts)
+        self.adb_btn_kmsg = wx.Button(parent=self.panel, label="Kmsg", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.adb_Kmsg_func, self.adb_btn_kmsg)
+        self.adb_btn_getevent = wx.Button(parent=self.panel, label="Getevent", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.adb_Getevent_func, self.adb_btn_getevent)
+        self.adb_btn_hidevirtual = wx.Button(parent=self.panel, label="HideVirtual", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.adb_HideVirtual_func, self.adb_btn_hidevirtual)
+        self.adb_btn_showvirtual = wx.Button(parent=self.panel, label="ShowVirtual", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.adb_ShowVirtual_func, self.adb_btn_showvirtual)
+        self.adb_btn_openpoint = wx.Button(parent=self.panel, label="OpenPoint", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.adb_OpenPoint_func, self.adb_btn_openpoint)
+        self.adb_btn_closepoint = wx.Button(parent=self.panel, label="ClosePoint", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.adb_ClosePoint_func, self.adb_btn_closepoint)
+        self.adb_btn_pullhxfile = wx.Button(parent=self.panel, label="PullHXFile", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.adb_PullHXFile_func, self.adb_btn_pullhxfile)
+
+        # for touch cmd buttons
+        self.touch_btn_title = wx.StaticText(self.panel, label="Touch cmd")
+        self.touch_btn_title.SetForegroundColour((0, 0, 255))
+        self.touch_btn_diagarr = wx.Button(parent=self.panel, label="DiagArr", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.touch_DiagArr_func, self.touch_btn_diagarr)
+        self.touch_btn_diagarr_value = wx.TextCtrl(self.panel, size=(80, 25), style=wx.TE_MULTILINE)
+        self.touch_btn_flashdump = wx.Button(parent=self.panel, label="FlashDump", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.touch_FlashDump_func, self.touch_btn_flashdump)
+        self.touch_btn_updatefw = wx.Button(parent=self.panel, label="UpdateFW", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.touch_UpdateFW_func, self.touch_btn_updatefw)
+        self.touch_btn_updatefw_adrr = wx.FilePickerCtrl(self.panel, size=(170, 25))
+        self.touch_btn_senseon = wx.Button(parent=self.panel, label="SenseOn", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.touch_SenseOn_func, self.touch_btn_senseon)
+        self.touch_btn_senseoff = wx.Button(parent=self.panel, label="SenseOff", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.touch_SenseOff_func, self.touch_btn_senseoff)
+        self.touch_btn_selftest = wx.Button(parent=self.panel, label="SelfTest", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.touch_SelfTest_func, self.touch_btn_selftest)
+        self.touch_btn_fwversion = wx.Button(parent=self.panel, label="FWVersion", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.touch_FWVersion_func, self.touch_btn_fwversion)
+        self.touch_btn_reset1 = wx.Button(parent=self.panel, label="Reset_1", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.touch_Reset_1_func, self.touch_btn_reset1)
+        self.touch_btn_reset4 = wx.Button(parent=self.panel, label="Reset_4", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.touch_Reset_4_func, self.touch_btn_reset4)
+        self.touch_btn_inten0 = wx.Button(parent=self.panel, label="Int_en_0", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.touch_Int_en_0_func, self.touch_btn_inten0)
+        self.touch_btn_inten1 = wx.Button(parent=self.panel, label="Int_en_1", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.touch_Int_en_1_func, self.touch_btn_inten1)
+
+        # for display cmd buttons
+        self.display_btn_title = wx.StaticText(self.panel, label="Ddisplay cmd")
+        self.display_btn_title.SetForegroundColour((0, 0, 255))
+        self.display_btn_1129 = wx.Button(parent=self.panel, label="1129", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.display_1129_func, self.display_btn_1129)
+        self.display_btn_2810 = wx.Button(parent=self.panel, label="2810", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.display_2810_func, self.display_btn_2810)
+        self.display_btn_openblight = wx.Button(parent=self.panel, label="OpenBlight", size=(80, 25))
+        self.Bind(wx.EVT_BUTTON, self.display_OpenBLight_func, self.display_btn_openblight)
+
+
         # Connect Button
+        self.wifi_title = wx.StaticText(self.panel, label="Wifi")
+        self.wifi_title.SetForegroundColour((0, 0, 255))
         self.connect_btn = wx.Button(parent=self.panel, label="Wifi Connect", size=(100, 30))
         self.Bind(wx.EVT_BUTTON, self.Btn_connect_func, self.connect_btn)
         self.disconnect_btn = wx.Button(parent=self.panel, label="Wifi Disconnect")
@@ -511,6 +548,10 @@ class ADB_Frame(wx.Frame):
         self.wifi_connect_status_text.SetForegroundColour((255, 0, 0))
 
         # Raw data observe
+        self.rawdata_title = wx.StaticText(self.panel, label="Rawdata")
+        self.rawdata_title.SetForegroundColour((0, 0, 255))
+        self.keep_history_mode = wx.CheckBox(self.panel, label="keep read write register history")
+        self.keep_history_mode.SetForegroundColour((255, 0, 0))
         self.read_raw_data_btn = wx.Button(parent=self.panel, label="Read", size=(100, 30))
         self.Bind(wx.EVT_BUTTON, self.Btn_raw_data_func, self.read_raw_data_btn)
         self.raw_data_diff_rb1 = wx.RadioButton(self.panel, 11, label='DIFF', style=wx.RB_GROUP)
@@ -541,7 +582,9 @@ class ADB_Frame(wx.Frame):
         self.register_read_btn.SetForegroundColour((0, 20, 255))
         self.Bind(wx.EVT_BUTTON, self.Btn_reg_read_func, self.register_read_btn)
         self.reg_address = wx.TextCtrl(self.panel, size=(150, 70), style=wx.TE_MULTILINE)
+        self.Bind(wx.EVT_TEXT, self.demo, self.reg_address)
         self.reg_data = wx.TextCtrl(self.panel, size=(550, 150), style=wx.TE_READONLY | wx.TE_MULTILINE)
+        self.read_register_length = wx.StaticText(self.panel, label="Read length")
         self.reg_data_line = wx.Choice(parent=self.panel,
                                        choices=['1', '2', '3', '4', '5', '6', '7', '8'],
                                        name="len",
@@ -566,57 +609,11 @@ class ADB_Frame(wx.Frame):
             self.replace_run_btn = wx.Button(parent=self.panel, label="Replace")
             self.Bind(wx.EVT_BUTTON, self.Btn_run_replace_func, self.replace_run_btn)
 
-        # for expend command
-        self.adb_btn = wx.Button(parent=self.panel, label="ADB", size=(50, 26))
-        self.Bind(wx.EVT_BUTTON, self.adb_btn_func, self.adb_btn)
-        self.adb_function_type = wx.Choice(parent=self.panel,
-                                       choices=['Root',
-                                                'ShutDown',
-                                                'PowerKey',
-                                                'ScreenShot',
-                                                'Reboot',
-                                                'CheckDevice',
-                                                'Home',
-                                                'Back',
-                                                'Vol_up',
-                                                'Vol_down',
-                                                'Getprop',
-                                                'Interrupts',
-                                                'Kmsg',
-                                                'Getevent',
-                                                'HideVirtual',
-                                                'ShowVirtual',
-                                                'OpenPoint',
-                                                'ClosePoint',
-                                                'PullHXFile'],
-                                       name="len",
-                                       size=(80, 26))
+    def demo(self, e):
+        self.panel_info.read_register_history()
+        print(self.panel_info.HISTORY_VALUE)
 
-        self.touch_btn = wx.Button(parent=self.panel, label="Touch", size=(50, 26))
-        self.Bind(wx.EVT_BUTTON, self.touch_btn_func, self.touch_btn)
-        self.touch_function_type = wx.Choice(parent=self.panel,
-                                       choices=['DiagArr',
-                                                'FlashDump',
-                                                'UpdateFW',
-                                                'SenseOn',
-                                                'SenseOff',
-                                                'SelfTest',
-                                                'FWVersion',
-                                                'Reset_1',
-                                                'Reset_4',
-                                                'Int_en_0',
-                                                'Int_en_1'],
-                                       name="len",
-                                       size=(80, 26))
-
-        self.display_btn = wx.Button(parent=self.panel, label="Display", size=(50, 26))
-        self.Bind(wx.EVT_BUTTON, self.display_btn_func, self.display_btn)
-        self.display_function_type = wx.Choice(parent=self.panel,
-                                       choices=['1129',
-                                                '2810',
-                                                'OpenBLight'],
-                                       name="len",
-                                       size=(80, 27))
+        self.reg_data.SetValue(str(self.panel_info.HISTORY_VALUE))
 
     def component_arrangement(self):
         space = 10
@@ -624,8 +621,120 @@ class ADB_Frame(wx.Frame):
         self.sizer = wx.BoxSizer(wx.VERTICAL)
         self.advancedsizer = None
 
-        self.sizer.AddSpacer(space)
+        # for adb cmd buttons
+        hsize = wx.BoxSizer(wx.HORIZONTAL)
+        hsize.Add(self.adb_btn_title, 0, wx.ALIGN_LEFT)
+        self.sizer.Add(hsize, 0, wx.ALIGN_TOP)
 
+        hsize = wx.BoxSizer(wx.HORIZONTAL)
+        hsize.Add(self.adb_btn_root, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.adb_btn_shutdown, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.adb_btn_powerkey, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.adb_btn_screenshot, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.adb_btn_reboot, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+
+        self.sizer.Add(hsize, 0, wx.ALIGN_TOP)
+
+        hsize = wx.BoxSizer(wx.HORIZONTAL)
+        hsize.Add(self.adb_btn_home, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.adb_btn_back, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.adb_btn_volup, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.adb_btn_voldown, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        self.sizer.Add(hsize, 0, wx.ALIGN_TOP)
+
+        hsize = wx.BoxSizer(wx.HORIZONTAL)
+        hsize.Add(self.adb_btn_getprop, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.adb_btn_interrupts, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.adb_btn_kmsg, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.adb_btn_getevent, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.adb_btn_checkdevice, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        self.sizer.Add(hsize, 0, wx.ALIGN_TOP)
+
+        hsize = wx.BoxSizer(wx.HORIZONTAL)
+
+        hsize.Add(self.adb_btn_hidevirtual, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.adb_btn_showvirtual, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.adb_btn_openpoint, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.adb_btn_closepoint, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.adb_btn_pullhxfile, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        self.sizer.Add(hsize, 0, wx.ALIGN_TOP)
+
+        # for touch cmd buttons
+        hsize = wx.BoxSizer(wx.HORIZONTAL)
+        hsize.Add(self. touch_btn_title, 0, wx.ALIGN_LEFT)
+        self.sizer.Add(hsize, 0, wx.ALIGN_TOP)
+
+        hsize = wx.BoxSizer(wx.HORIZONTAL)
+        hsize.Add(self.touch_btn_fwversion, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.touch_btn_reset1, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.touch_btn_senseon, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.touch_btn_senseoff, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.touch_btn_selftest, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        self.sizer.Add(hsize, 0, wx.ALIGN_TOP)
+
+        hsize = wx.BoxSizer(wx.HORIZONTAL)
+        hsize.Add(self.touch_btn_diagarr, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.touch_btn_diagarr_value, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.touch_btn_updatefw, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.touch_btn_updatefw_adrr, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        self.sizer.Add(hsize, 0, wx.ALIGN_TOP)
+        hsize = wx.BoxSizer(wx.HORIZONTAL)
+        hsize.Add(self.touch_btn_flashdump, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.touch_btn_reset4, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.touch_btn_inten0, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.touch_btn_inten1, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        self.sizer.Add(hsize, 0, wx.ALIGN_TOP)
+
+        # for display cmd
+        hsize = wx.BoxSizer(wx.HORIZONTAL)
+        hsize.Add(self.display_btn_title, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        self.sizer.Add(hsize, 0, wx.ALIGN_TOP)
+        hsize = wx.BoxSizer(wx.HORIZONTAL)
+        hsize.Add(self.display_btn_1129, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.display_btn_2810, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.display_btn_openblight, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        self.sizer.Add(hsize, 0, wx.ALIGN_TOP)
+
+        # for wifi
+        hsize = wx.BoxSizer(wx.HORIZONTAL)
+        hsize.Add(self.wifi_title, 0, wx.ALIGN_LEFT)
+        self.sizer.Add(hsize, 0, wx.ALIGN_TOP)
         hsize = wx.BoxSizer(wx.HORIZONTAL)
         hsize.Add(self.connect_btn, 0, wx.ALIGN_LEFT)
         hsize.AddSpacer(space)
@@ -639,6 +748,13 @@ class ADB_Frame(wx.Frame):
 
         self.sizer.AddSpacer(space)
 
+        # for rawdata options
+        hsize = wx.BoxSizer(wx.HORIZONTAL)
+        hsize.Add(self.rawdata_title, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.AddSpacer(space)
+        hsize.Add(self.keep_history_mode, 0, wx.ALIGN_LEFT)
+        self.sizer.Add(hsize, 0, wx.ALIGN_TOP)
 
         hsize = wx.BoxSizer(wx.HORIZONTAL)
         hsize.Add(self.read_raw_data_btn, 0, wx.ALIGN_LEFT)
@@ -673,6 +789,8 @@ class ADB_Frame(wx.Frame):
         hsize.Add(self.register_read_btn, 0, wx.ALIGN_CENTER_VERTICAL)
         hsize.AddSpacer(space)
         hsize.Add(self.reg_address, 0, wx.ALIGN_LEFT)
+        hsize.AddSpacer(space)
+        hsize.Add(self.read_register_length, 0, wx.ALIGN_CENTER_VERTICAL)
         hsize.Add(self.reg_data_line, 0, wx.ALIGN_CENTER_VERTICAL)
         self.sizer.Add(hsize, 0, wx.ALIGN_TOP)
 
@@ -683,23 +801,6 @@ class ADB_Frame(wx.Frame):
         self.sizer.Add(hsize, 0, wx.ALIGN_TOP)
 
         self.sizer.AddSpacer(space)
-
-        # for common adb command
-        hsize = wx.BoxSizer(wx.HORIZONTAL)
-        hsize.Add(self.adb_btn, 0, wx.ALIGN_LEFT)
-        hsize.Add(self.adb_function_type, 0, wx.ALIGN_LEFT)  # morgen
-        hsize.AddSpacer(space)
-        # for driver debug node
-        hsize.Add(self.touch_btn, 0, wx.ALIGN_LEFT)
-        hsize.Add(self.touch_function_type, 0, wx.ALIGN_LEFT)  # morgen
-        hsize.AddSpacer(space)
-        # for display scripts
-        hsize.Add(self.display_btn, 0, wx.ALIGN_LEFT)
-        hsize.Add(self.display_function_type, 0, wx.ALIGN_LEFT)  # morgen
-        self.sizer.Add(hsize, 0, wx.ALIGN_TOP)
-
-        hsize = wx.BoxSizer(wx.VERTICAL)
-        self.sizer.Add(hsize, 0, wx.ALIGN_TOP)
 
         # ======================advancesizer===================
         if (self.OTHER_FUNCTION_DEFINE == 1):
@@ -742,7 +843,7 @@ class ADB_Frame(wx.Frame):
         response = (self.adb_tool.shell(cmd))
         print(response)
 
-    """def adb_Root_func(self,e):
+    def adb_Root_func(self,e):
         self.adb_tool.shell("adb root")
         self.adb_tool.shell("adb remount")
         self.adb_tool.shell("adb shell setenforce 0")
@@ -821,12 +922,21 @@ class ADB_Frame(wx.Frame):
 
 
     def touch_DiagArr_func(self,e):
-        print("Will be added!")
+        name = self.touch_btn_diagarr_value.GetValue()
+        if self.panel_info.driver_version == 1:
+            self.adb_tool.shell("echo %s > " % name + self.panel_info.V1_DIAGARR_PATH, "SHELL")
+        elif self.panel_info.driver_version == 2:
+            self.adb_tool.shell("echo diag_arr,%s > " % name + self.panel_info.DEBUG_PATH, "SHELL")
+
 
     def touch_FlashDump_func(self,e):
         print("Will be added!")
     def touch_UpdateFW_func(self,e):
-        print("Will be added!")
+        fw_path = self.touch_btn_updatefw_adrr.GetPath()
+        ret = self.adb_tool.shell("adb push %s " % fw_path + self.panel_info.FW_PATH)
+        print(ret)
+        ret = self.adb_tool.shell("echo t Himax_firmware.bin > " + self.panel_info.DEBUG_PATH, "SHELL")
+        print(ret)
     def touch_SenseOn_func(self,e):
         self.adb_tool.shell(self.panel_info.SENSEON, "SHELL")
     def touch_SenseOff_func(self,e):
@@ -873,126 +983,8 @@ class ADB_Frame(wx.Frame):
             self.adb_tool.shell("sleep 1", "SHELL")
             self.adb_tool.shell("echo register,w:x30010000 > " + self.panel_info.DEBUG_PATH, "SHELL")
     def display_OpenBLight_func(self,e):
-        print("Will be added!")"""
+        print("Will be added!")
 
-    # will be delete func
-    def adb_btn_func(self, event):
-        selection = self.adb_function_type.GetStringSelection()
-        if selection == 'Root':
-            self.adb_tool.shell("adb root")
-            self.adb_tool.shell("adb remount")
-            self.adb_tool.shell("adb shell setenforce 0")
-            self.adb_tool.shell("adb shell chmod 777 /proc/android_touch/*")
-            self.adb_tool.shell("adb shell chmod 777 /proc/android_touch/diag/*")
-            print("execute root, remount, setenforce 0, chmod")
-        elif selection == 'ShutDown':
-            self.adb_tool.shell("adb shell reboot -p")
-        elif selection == 'PowerKey':
-            self.adb_tool.shell(None, "KEYEVENT", 26)
-        elif selection == 'ScreenShot':
-            print("Screen Shot...")
-            name = time.strftime("%Y%m%d_%H-%M-%S", time.localtime()) + ".png"
-            cmd = "adb wait-for-device shell screencap -p /sdcard/%s" % (name)
-            self.adb_tool.shell(cmd)
-            cmd = "adb pull /sdcard/%s" % (name)
-            self.adb_tool.shell(cmd)
-            print("Screen Shot Done")
-        elif selection == 'Reboot':
-            self.adb_tool.shell("adb reboot")
-        elif selection == 'CheckDevice':
-            res = self.adb_tool.shell("adb devices")
-            print(res)
-
-        elif selection == 'Home':
-            self.adb_tool.shell("adb shell input keyevent KEYCODE_HOME")
-        elif selection == 'Back':
-            self.adb_tool.shell("adb shell input keyevent KEYCODE_BACK")
-        elif selection == 'Vol_up':
-            self.adb_tool.shell("adb shell input keyevent KEYCODE_VOLUME_UP")
-        elif selection == 'Vol_down':
-            self.adb_tool.shell("adb shell input keyevent KEYCODE_VOLUME_DOWN")
-        elif selection == 'Getprop':
-            ret = self.adb_tool.shell("adb shell getprop")
-            print(ret)
-        elif selection == 'Interrupts':
-            ret = self.adb_tool.shell("adb shell cat /proc/interrupts")
-            print(ret)
-        elif selection == 'Kmsg':
-            ret = self.adb_tool.keep_listen_shell("adb shell cat /dev/kmsg")
-            print(ret)
-        elif selection == 'Getevent':
-            ret = self.adb_tool.keep_listen_shell("adb shell getevent -lr")
-            print(ret)
-        elif selection == 'HideVirtual':
-            self.adb_tool.shell("adb shell settings put global policy_control immersive.full=*")
-        elif selection == 'ShowVirtual':
-            self.adb_tool.shell("adb shell settings put global policy_control null")
-        elif selection == 'OpenPoint':
-            self.adb_tool.shell("settings put system pointer_location 1", "SHELL")
-            self.adb_tool.shell("settings put system show_touches 1", "SHELL")
-        elif selection == 'ClosePoint':
-            self.adb_tool.shell("settings put system pointer_location 0", "SHELL")
-            self.adb_tool.shell("settings put system show_touches 0", "SHELL")
-        elif selection == 'PullHXFile':
-            print("Pull HX File...")
-            feed_back = self.panel_info.pull_hx_file()
-            print(feed_back)
-
-    def touch_btn_func(self, event):
-        selection = self.touch_function_type.GetStringSelection()
-        if selection == 'SelfTest':
-            ret = self.adb_tool.shell(self.panel_info.CAT_SELFTEST, "SHELL")
-            print(ret)
-        elif selection == 'FWVersion':
-            self.adb_tool.shell(self.panel_info.ECHO_FW_VERSION % "v", "SHELL")
-            ret = self.adb_tool.shell(self.panel_info.CAT_FW_VERSION, "SHELL")
-            print(ret)
-        elif selection == 'Reset_1':
-            self.adb_tool.shell(self.panel_info.ECHO_RESET % "1", "SHELL")
-            print("trigger reset pin")
-        elif selection == 'Reset_4':
-            self.adb_tool.shell(self.panel_info.ECHO_RESET % "4", "SHELL")
-            print("reload config,turn on/off irq,trigger reset pin")
-        elif selection == 'Int_en_0':
-            self.adb_tool.shell(self.panel_info.ECHO_INT_EN % "0", "SHELL")
-        elif selection == 'Int_en_1':
-            self.adb_tool.shell(self.panel_info.ECHO_INT_EN % "1", "SHELL")
-        elif selection == 'SenseOn':
-            self.adb_tool.shell(self.panel_info.SENSEON, "SHELL")
-        elif selection == 'SenseOff':
-            self.adb_tool.shell(self.panel_info.SENSEOFF, "SHELL")
-            print(self.panel_info.SENSEOFF)
-        elif selection == 'FlashDump':
-            print("Will be added!")
-        elif selection == 'UpdateFW':
-            print("Will be added!")
-        elif selection == 'DiagArr':
-            print("Will be added!")
-
-    def display_btn_func(self, event):
-        selection = self.display_function_type.GetStringSelection()
-        if selection == '1129':
-            print("1129")
-            if self.panel_info.driver_version == 1:
-                self.adb_tool.shell("echo w:x30011000 > " + self.panel_info.V1_REG_PATH, "SHELL")
-                self.adb_tool.shell("sleep 1", "SHELL")
-                self.adb_tool.shell("echo w:x30029000 > " + self.panel_info.V1_REG_PATH, "SHELL")
-            elif self.panel_info.driver_version == 2:
-                self.adb_tool.shell("echo register,w:x30011000 > " + self.panel_info.DEBUG_PATH, "SHELL")
-                self.adb_tool.shell("sleep 1", "SHELL")
-                self.adb_tool.shell("echo register,w:x30029000 > " + self.panel_info.DEBUG_PATH, "SHELL")
-        elif selection == '2810':
-            print("2810")
-            if self.panel_info.driver_version == 1:
-                self.adb_tool.shell("echo w:x30028000 > " + self.panel_info.V1_REG_PATH, "SHELL")
-                self.adb_tool.shell("sleep 1", "SHELL")
-                self.adb_tool.shell("echo w:x30010000 > " + self.panel_info.V1_REG_PATH, "SHELL")
-            elif self.panel_info.driver_version == 2:
-                self.adb_tool.shell("echo register,w:x30028000 > " + self.panel_info.DEBUG_PATH, "SHELL")
-                self.adb_tool.shell("sleep 1", "SHELL")
-                self.adb_tool.shell("echo register,w:x30010000 > " + self.panel_info.DEBUG_PATH, "SHELL")
-        elif selection == 'OpenBLight':
-            print("Will be added!")
 
     def Btn_raw_data_func(self, event):
         # print ("Click")
@@ -1081,6 +1073,7 @@ class ADB_Frame(wx.Frame):
                 self.logging_file.close()
             self.logging_status = 0
 
+
     def Btn_reg_read_func(self, event):
 
         read_reg_info = ""
@@ -1090,9 +1083,11 @@ class ADB_Frame(wx.Frame):
         else:
             lines = int(self.reg_data_line.GetStringSelection())
 
+
+
         for i in range(self.reg_address.GetNumberOfLines()):
             reg_address = (self.reg_address.GetLineText(i))
-
+            self.panel_info.write_register_history(str(reg_address) + '\n')
             reg_info = self.panel_info.read_register(reg_address)
 
             # read only the single line
