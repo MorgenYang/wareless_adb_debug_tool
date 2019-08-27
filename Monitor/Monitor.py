@@ -132,12 +132,6 @@ class Panel_info():
                 line = line[:8]
                 self.HISTORY_VALUE.append(line)
 
-    def read_history_file_to_string(self, e):
-        with open(HISTORY_FILE, 'rb') as r:
-            for line in r.readlines():
-                e = e + line
-            return e
-
     def write_history_file(self, cmd):
         if cmd == '\n':
             return
@@ -145,8 +139,6 @@ class Panel_info():
         self.read_history_file()
 
         cmd = cmd[:8]
-        if cmd in self.HISTORY_VALUE:
-            return
 
         f = open(HISTORY_FILE, 'a+')
         f.write(cmd + '\n')
@@ -439,7 +431,7 @@ class ADB_Frame(wx.Frame):
         # do root func
         self.adb_Root_func()
 
-        self.read_reg_history.SetValue("Show R/W register history address")
+        # morgen
 
     def About(self, e):
         description = "Help file:"
@@ -607,7 +599,6 @@ class ADB_Frame(wx.Frame):
                                        choices=['1', '2', '3', '4', '5', '6', '7', '8'],
                                        name="len",
                                        size=(40, 30))
-        self.read_reg_history = wx.TextCtrl(self.panel, size=(180, 150), style=wx.TE_READONLY | wx.TE_MULTILINE)
 
         # other function
         if (self.OTHER_FUNCTION_DEFINE & 2 == 2):
@@ -805,8 +796,6 @@ class ADB_Frame(wx.Frame):
         hsize.AddSpacer(space)
         hsize.Add(self.read_register_length, 0, wx.ALIGN_CENTER_VERTICAL)
         hsize.Add(self.reg_data_line, 0, wx.ALIGN_CENTER_VERTICAL)
-        hsize.AddSpacer(space)
-        hsize.Add(self.read_reg_history, 0, wx.ALIGN_RIGHT)
         self.sizer.Add(hsize, 0, wx.ALIGN_TOP)
 
         self.sizer.AddSpacer(space)
@@ -1091,7 +1080,6 @@ class ADB_Frame(wx.Frame):
 
     def Btn_reg_read_func(self, event):
         read_reg_info = ""
-        result = ""
 
         if self.reg_data_line.GetStringSelection() == '':
             lines = 1
@@ -1112,12 +1100,7 @@ class ADB_Frame(wx.Frame):
 
         self.reg_data.SetValue(read_reg_info)  # output return value
 
-        # show history
-        self.read_reg_history.SetValue(self.panel_info.read_history_file_to_string(result))
-
     def Btn_reg_write_func(self, event):
-        result = ""
-
         reg_address_obj = self.register_write_btn_list[event.Id]['address']  # get reg address
         write_value_obj = self.register_write_btn_list[event.Id]['value']  # get reg address
         n = min(reg_address_obj.GetNumberOfLines(), write_value_obj.GetNumberOfLines())
@@ -1130,9 +1113,6 @@ class ADB_Frame(wx.Frame):
             write_value = write_value_obj.GetLineText(i)
 
             self.panel_info.write_register(reg_address, write_value)
-
-        # show history
-        self.read_reg_history.SetValue(self.panel_info.read_history_file_to_string(result))
 
     def Btn_run_replace_func(self, event):
         folder_path = self.replace_folder_path.GetPath()
