@@ -31,10 +31,12 @@ FW_PATH = /vendor/firmware/Himax_firmware.bin
 
 WRITE_REG_NUM = 5
 
-# 1111(15):open all
-# 111(7):close adb ui
-# 11(3):close adb and touch ui
-# 1:close adb touch and display ui
-# 2 or 4 means other
-OTHER_FUNCTION = 0
+# 11111(31):different bit means function switch
+# 16:only open adb
+# 8:only open touch
+# 4:only open display
+# 2:only open swipe line
+# 1:only open replace
+OTHER_FUNCTION = 8
+
 PORT_NUM = 8888
