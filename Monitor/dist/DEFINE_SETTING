@@ -7,6 +7,7 @@ V1_REG_PATH = /proc/android_touch/register
 V1_INT_EN_PATH = /proc/android_touch/int_en
 V1_RESET_PATH = /proc/android_touch/reset
 V1_SENSEONOFF_PATH = /proc/android_touch/SenseOnOff
+V1_DIAGARR_PATH = /proc/android_touch/SenseOnOff
 
 #V1_DIAG_PATH = /proc/touchpanel/debug_info/himax/diag
 #V1_REG_PATH = /proc/touchpanel/debug_info/himax/register
@@ -26,7 +27,16 @@ SELFTEST_PATH = /proc/android_touch/self_test
 DEBUG_PATH = /proc/android_touch/debug
 FLASH_DUMP_PATH = /proc/android_touch/flash_dump
 HX_FOLDER_PATH = /sdcard/HimaxAPK/tmp
+FW_PATH = /vendor/firmware/Himax_firmware.bin
 
 WRITE_REG_NUM = 5
-OTHER_FUNCTION = 0
+
+# 11111(31):different bit means function switch
+# 10000(16):only open adb
+#  1000(8) :only open touch
+#   100(4) :only open display
+#    10(2) :only open swipe line
+#     1    :only open replace
+OTHER_FUNCTION = 31
+
 PORT_NUM = 8888

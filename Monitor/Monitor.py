@@ -370,7 +370,7 @@ class ADB_Frame(wx.Frame):
 
     def __init__(self):
         print("Create ADB GUI")
-        wx.Frame.__init__(self, parent=None, title="ADB monitor 1.0.1", size=(600, 900))
+        wx.Frame.__init__(self, parent=None, title="ADB monitor 1.0.2", size=(600, 900))
         self.counter = 1000
         self.device_ip = ""
         self.device_ip_port = ""

@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="e5191513-33e3-4ab3-99d3-fbfe8e743383" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/DEFINE_SETTING" beforeDir="false" afterPath="$PROJECT_DIR$/DEFINE_SETTING" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HISTORY" beforeDir="false" afterPath="$PROJECT_DIR$/HISTORY" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Monitor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Monitor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/Monitor/EXE-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/Monitor/EXE-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/Monitor/PKG-00.pkg" beforeDir="false" afterPath="$PROJECT_DIR$/build/Monitor/PKG-00.pkg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/Monitor.exe" beforeDir="false" afterPath="$PROJECT_DIR$/dist/Monitor.exe" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,11 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Monitor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="47">
-              <caret line="389" column="28" lean-forward="true" selection-start-line="389" selection-start-column="28" selection-end-line="389" selection-end-column="28" />
+            <state relative-caret-position="333">
+              <caret line="375" column="32" selection-start-line="375" selection-start-column="32" selection-end-line="375" selection-end-column="32" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
                 <element signature="e#27942#30366#0" />
@@ -33,7 +35,7 @@
         <entry file="file://$PROJECT_DIR$/HISTORY">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="176">
-              <caret line="8" column="8" lean-forward="true" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
+              <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -59,11 +61,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DEFINE_SETTING">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
-              <caret line="39" column="18" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="18" />
+            <state relative-caret-position="491">
+              <caret line="29" column="45" lean-forward="true" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -112,10 +114,15 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/HISTORY" />
-        <option value="$PROJECT_DIR$/DEFINE_SETTING" />
         <option value="$PROJECT_DIR$/Monitor.py" />
+        <option value="$PROJECT_DIR$/DEFINE_SETTING" />
       </list>
     </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="83" />
+    <option name="width" value="1447" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectId" id="1PggUbUXbrXznB0yxdYzroifQXo" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -209,7 +216,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.31106243" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.47973713" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -278,17 +285,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DEFINE_SETTING">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="39" column="18" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/HISTORY">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
-          <caret line="8" column="8" lean-forward="true" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
+          <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -304,14 +304,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Monitor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="47">
-          <caret line="389" column="28" lean-forward="true" selection-start-line="389" selection-start-column="28" selection-end-line="389" selection-end-column="28" />
+        <state relative-caret-position="333">
+          <caret line="375" column="32" selection-start-line="375" selection-start-column="32" selection-end-line="375" selection-end-column="32" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
             <element signature="e#27942#30366#0" />
             <element signature="e#30710#32464#0" />
             <element signature="e#32356#32938#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DEFINE_SETTING">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="491">
+          <caret line="29" column="45" lean-forward="true" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
         </state>
       </provider>
     </entry>
