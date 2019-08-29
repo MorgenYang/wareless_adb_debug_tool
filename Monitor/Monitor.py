@@ -38,6 +38,7 @@ PATH_OPCODE = ["V1_REG_PATH",
 
 DEFINE_FILE = "./DEFINE_SETTING"
 HISTORY_FILE = "./HISTORY"
+BT_ID = []
 
 DIFF_DIAG = 1
 DC_DIAG = 2
@@ -125,25 +126,45 @@ class Panel_info():
         diag_trigger = self.ECHO_DIAG % (str(0))
         self.adb.shell(diag_trigger, "SHELL")
 
-    def read_history_file(self):
+    def init_register_adrr_func(self):
         self.HISTORY_VALUE = []
         with open(HISTORY_FILE, 'rb') as r:
             for line in r.readlines():
-                line = line[:8]
+                line = line.split(':')
+                if line[0] == '':
+                    continue
                 self.HISTORY_VALUE.append(line)
+            r.close()
 
-    def write_history_file(self, cmd):
-        if cmd == '\n':
+    def read_write_history_file(self, addr):
+        if addr == '\n' or addr == '\r\n' or addr == '':
             return
 
-        self.read_history_file()
+        addr = addr.split('\n')
 
-        cmd = cmd[:8]
+        i = 0
+        cmd = 'R:'
+        length = len(addr)
+        while i < length:
+            if i == length - 1:
+                cmd += addr[i]
+            else:
+                cmd += addr[i] + ':'
+            i = i + 1
 
         f = open(HISTORY_FILE, 'a+')
         f.write(cmd + '\n')
         f.close()
 
+    def write_history_file(self, addr, val, e):
+        if addr == '\n' or val == '\n' or addr == '' or val == '':
+            return
+
+        if e.Id in BT_ID:
+            cmd = 'W%s' % BT_ID.index(e.Id) + ':' + addr + ':' + val
+            f = open(HISTORY_FILE, 'a+')
+            f.write(cmd + '\n')
+            f.close()
 
     def setting_path(self):
         with open(DEFINE_FILE, 'rb') as r:
@@ -362,7 +383,7 @@ class ADB_Frame(wx.Frame):
 
     def __init__(self):
         print("Create ADB GUI")
-        wx.Frame.__init__(self, parent=None, title="ADB monitor 1.0.2", size=(600, 900))
+        wx.Frame.__init__(self, parent=None, title="ADB monitor 1.0.3", size=(600, 900))
         self.counter = 1000
         self.device_ip = ""
         self.device_ip_port = ""
@@ -432,6 +453,31 @@ class ADB_Frame(wx.Frame):
         self.adb_Root_func()
 
         # morgen
+        self.panel_info.init_register_adrr_func()
+        self.set_read_write_register_value()
+
+
+    def set_read_write_register_value(self):
+        i = 0
+        while i < len(self.panel_info.HISTORY_VALUE):
+            j = 0
+            while j < self.WRITE_REG_NUM:
+                if self.panel_info.HISTORY_VALUE[i][0] == 'W%s' % j:
+                    self.register_write_btn_list[BT_ID[j]]['address'].SetValue(self.panel_info.HISTORY_VALUE[i][1])
+                    self.register_write_btn_list[BT_ID[j]]['value'].SetValue(self.panel_info.HISTORY_VALUE[i][2][:len(self.panel_info.HISTORY_VALUE[i][2])-2])
+                elif self.panel_info.HISTORY_VALUE[i][0] == 'R':
+                    a = len(self.panel_info.HISTORY_VALUE[i])
+                    c = 1
+                    valueStr = ''
+                    while c < a:
+                        if c == a-1:
+                            valueStr = valueStr + self.panel_info.HISTORY_VALUE[i][c]
+                        else:
+                            valueStr = valueStr + self.panel_info.HISTORY_VALUE[i][c] + '\n'
+                        c = c + 1
+                    self.reg_address.SetValue(valueStr[:len(valueStr)-2])
+                j = j + 1
+            i = i + 1
 
     def About(self, e):
         description = "Help file:"
@@ -440,8 +486,6 @@ class ADB_Frame(wx.Frame):
         info.SetDescription(description)
         info.SetWebSite('http://10.240.233.75/Android%20Driver')
         wx.adv.AboutBox(info)
-
-
 
     def setting_frame(self):
         with open(DEFINE_FILE, 'rb') as r:
@@ -581,12 +625,14 @@ class ADB_Frame(wx.Frame):
 
         # Register write
         self.register_write_btn_list = {}
+        #self.bt_id = []
         for i in range(self.WRITE_REG_NUM):
-            bt = wx.Button(parent=self.panel, label="Register Write", size=(100, 30))
+            self.bt = wx.Button(parent=self.panel, label="Register Write %s" % i, size=(100, 30))
             address_obj = wx.TextCtrl(self.panel, size=(150, 30))
             value_obj = wx.TextCtrl(self.panel, size=(160, 30))
-            self.register_write_btn_list[bt.Id] = {'address': address_obj, 'value': value_obj, 'bt': bt}
-            self.Bind(wx.EVT_BUTTON, self.Btn_reg_write_func, bt)
+            self.register_write_btn_list[self.bt.Id] = {'address': address_obj, 'value': value_obj, 'bt': self.bt}
+            self.Bind(wx.EVT_BUTTON, self.Btn_reg_write_func, self.bt)
+            BT_ID.append(self.bt.Id)
 
         # Register read
         self.register_read_btn = wx.Button(parent=self.panel, label="Register Read", size=(100, 30))
@@ -779,7 +825,7 @@ class ADB_Frame(wx.Frame):
 
         self.sizer.AddSpacer(space)
 
-        for key in self.register_write_btn_list:
+        for key in BT_ID:
             hsize = wx.BoxSizer(wx.HORIZONTAL)
             hsize.Add((self.register_write_btn_list[key]['bt']), 0, wx.ALIGN_LEFT)
             hsize.AddSpacer(space)
@@ -1080,7 +1126,6 @@ class ADB_Frame(wx.Frame):
 
     def Btn_reg_read_func(self, event):
         read_reg_info = ""
-
         if self.reg_data_line.GetStringSelection() == '':
             lines = 1
         else:
@@ -1088,17 +1133,13 @@ class ADB_Frame(wx.Frame):
 
         for i in range(self.reg_address.GetNumberOfLines()):
             reg_address = (self.reg_address.GetLineText(i))
-
-            # write history
-            self.panel_info.write_history_file(str(reg_address) + '\n')
-
             reg_info = self.panel_info.read_register(reg_address)
-
-            # read only the single line
             reg_info = reg_info[:103 + 82*(lines - 1)]
             read_reg_info += reg_info
 
-        self.reg_data.SetValue(read_reg_info)  # output return value
+        self.reg_data.SetValue(read_reg_info)
+        reg_address_all = self.reg_address.GetValue()
+        self.panel_info.read_write_history_file(reg_address_all)
 
     def Btn_reg_write_func(self, event):
         reg_address_obj = self.register_write_btn_list[event.Id]['address']  # get reg address
@@ -1106,13 +1147,11 @@ class ADB_Frame(wx.Frame):
         n = min(reg_address_obj.GetNumberOfLines(), write_value_obj.GetNumberOfLines())
         for i in range(n):
             reg_address = reg_address_obj.GetLineText(i)
-
-            # write history
-            self.panel_info.write_history_file(str(reg_address) + '\n')
-
             write_value = write_value_obj.GetLineText(i)
-
             self.panel_info.write_register(reg_address, write_value)
+
+            # morgen add
+            self.panel_info.write_history_file(reg_address, write_value, event)
 
     def Btn_run_replace_func(self, event):
         folder_path = self.replace_folder_path.GetPath()

@@ -37,6 +37,6 @@ WRITE_REG_NUM = 5
 #   100(4) :only open display
 #    10(2) :only open swipe line
 #     1    :only open replace
-OTHER_FUNCTION = 31
+OTHER_FUNCTION = 24
 
 PORT_NUM = 8888
