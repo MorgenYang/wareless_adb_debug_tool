@@ -74,34 +74,8 @@ class Panel_info():
 
         self.driver_version = DRIVER_VERSION
 
-        self.setting_path()
+        self.setting_path(0)
 
-        if self.driver_version == 1:
-            self.ECHO_DIAG = "echo %s > " + self.V1_DIAG_PATH
-            self.CAT_DIAG = "cat " + self.V1_DIAG_PATH
-            self.ECHO_WRITE_REGISTER = "echo w:x%s:x%s > " + self.V1_REG_PATH
-            self.ECHO_READ_REGISTER = "echo r:x%s > " + self.V1_REG_PATH
-            self.CAT_READ_REGISTER = "cat " + self.V1_REG_PATH
-            self.ECHO_INT_EN = "echo %s > " + self.V1_INT_EN_PATH
-            self.ECHO_RESET = "echo %s > " + self.V1_RESET_PATH
-            self.SENSEON = "echo 1 > " + self.V1_SENSEONOFF_PATH
-            self.SENSEOFF = "echo 0 > " + self.V1_SENSEONOFF_PATH
-        elif self.driver_version == 2:
-            self.ECHO_DIAG = "echo diag,%s > " + self.DEBUG_PATH
-            self.CAT_DIAG = "cat " + self.V2_READ_STACK_PATH
-            self.ECHO_WRITE_REGISTER = "echo register,w:x%s:x%s > " + self.DEBUG_PATH
-            self.ECHO_READ_REGISTER = "echo register,r:x%s > " + self.DEBUG_PATH
-            self.CAT_READ_REGISTER = "cat " + self.DEBUG_PATH
-            self.ECHO_INT_EN = "echo int_en,%s > " + self.DEBUG_PATH
-            self.ECHO_RESET = "echo reset,%s > " + self.DEBUG_PATH
-            self.SENSEON = "echo senseonoff,1 > " + self.DEBUG_PATH
-            self.SENSEOFF = "echo senseonoff,0 > " + self.DEBUG_PATH
-
-        self.CAT_SELFTEST = "cat " + self.SELFTEST_PATH
-        self.ECHO_FW_VERSION = "echo %s > " + self.DEBUG_PATH
-        self.CAT_FW_VERSION = "cat " + self.DEBUG_PATH
-
-        self.PULL_HX_FILE = "adb pull " + self.HX_FOLDER_PATH
 
         # Local object & variable
         self.adb = adb
@@ -166,7 +140,7 @@ class Panel_info():
             f.write(cmd + '\n')
             f.close()
 
-    def setting_path(self):
+    def setting_path(self, mode):
         with open(DEFINE_FILE, 'rb') as r:
             for line in r.readlines():
                 if line.find("#") >= 0:
@@ -176,19 +150,24 @@ class Panel_info():
                 l = l.split('=')
 
                 if len(l) >= 2:
-                    if l[0] == "DRIVER_VERSION":
-                        if l[1] == "V2":
-                            self.driver_version = 2
-                            print("DRIVER_VERSION = V2")
-                            continue
-                        elif l[1] == "V1":
-                            self.driver_version = 1
-                            print("DRIVER_VERSION = V1")
-                            continue
-                        else:
-                            self.driver_version = 0
-                            print("driver version was wrong,please check it again!")
-                            break
+                    if mode == 0:
+                        if l[0] == "DRIVER_VERSION":
+                            if l[1] == "V2":
+                                self.driver_version = 2
+                                print("DRIVER_VERSION = V2")
+                                continue
+                            elif l[1] == "V1":
+                                self.driver_version = 1
+                                print("DRIVER_VERSION = V1")
+                                continue
+                            else:
+                                self.driver_version = 0
+                                print("driver version was wrong,please check it again!")
+                                break
+                    elif mode == 1:
+                        self.driver_version = 1
+                    elif mode == 2:
+                        self.driver_version = 2
 
                     if l[0] in PATH_OPCODE:
                         path = l[1]
@@ -197,7 +176,6 @@ class Panel_info():
                         if path[-1] == '/':
                             path = path[:-1]
                         # Assign path
-                        print(l)
                         # common
                         if l[0] == "DEBUG_PATH":
                             self.DEBUG_PATH = path
@@ -236,6 +214,33 @@ class Panel_info():
                                 self.V2_READ_STACK_PATH = path
                         else:
                             print("please check the DEFINE_SETTING file")
+
+        if self.driver_version == 1:
+            self.ECHO_DIAG = "echo %s > " + self.V1_DIAG_PATH
+            self.CAT_DIAG = "cat " + self.V1_DIAG_PATH
+            self.ECHO_WRITE_REGISTER = "echo w:x%s:x%s > " + self.V1_REG_PATH
+            self.ECHO_READ_REGISTER = "echo r:x%s > " + self.V1_REG_PATH
+            self.CAT_READ_REGISTER = "cat " + self.V1_REG_PATH
+            self.ECHO_INT_EN = "echo %s > " + self.V1_INT_EN_PATH
+            self.ECHO_RESET = "echo %s > " + self.V1_RESET_PATH
+            self.SENSEON = "echo 1 > " + self.V1_SENSEONOFF_PATH
+            self.SENSEOFF = "echo 0 > " + self.V1_SENSEONOFF_PATH
+        elif self.driver_version == 2:
+            self.ECHO_DIAG = "echo diag,%s > " + self.DEBUG_PATH
+            self.CAT_DIAG = "cat " + self.V2_READ_STACK_PATH
+            self.ECHO_WRITE_REGISTER = "echo register,w:x%s:x%s > " + self.DEBUG_PATH
+            self.ECHO_READ_REGISTER = "echo register,r:x%s > " + self.DEBUG_PATH
+            self.CAT_READ_REGISTER = "cat " + self.DEBUG_PATH
+            self.ECHO_INT_EN = "echo int_en,%s > " + self.DEBUG_PATH
+            self.ECHO_RESET = "echo reset,%s > " + self.DEBUG_PATH
+            self.SENSEON = "echo senseonoff,1 > " + self.DEBUG_PATH
+            self.SENSEOFF = "echo senseonoff,0 > " + self.DEBUG_PATH
+
+        self.CAT_SELFTEST = "cat " + self.SELFTEST_PATH
+        self.ECHO_FW_VERSION = "echo %s > " + self.DEBUG_PATH
+        self.CAT_FW_VERSION = "cat " + self.DEBUG_PATH
+
+        self.PULL_HX_FILE = "adb pull " + self.HX_FOLDER_PATH
 
     def echo_raw_data(self, diag):
         diag_trigger = self.ECHO_DIAG % (str(diag))
@@ -579,7 +584,8 @@ class ADB_Frame(wx.Frame):
             self.Bind(wx.EVT_BUTTON, self.touch_Int_en_0_func, self.touch_btn_inten0)
             self.touch_btn_inten1 = wx.Button(parent=self.panel, label="Int_en_1", size=(80, 25))
             self.Bind(wx.EVT_BUTTON, self.touch_Int_en_1_func, self.touch_btn_inten1)
-
+            self.touch_btn_switch_driver_version = wx.ToggleButton(parent=self.panel, label="Switch_drv", size=(80, 25))
+            self.Bind(wx.EVT_TOGGLEBUTTON, self.touch_switch_driver_version, self.touch_btn_switch_driver_version)
         # for display cmd buttons
         if (self.OTHER_FUNCTION_DEFINE & 4 == 4):
             self.display_btn_title = wx.StaticText(self.panel, label="Ddisplay cmd")
@@ -764,6 +770,8 @@ class ADB_Frame(wx.Frame):
             hsize.Add(self.touch_btn_inten0, 0, wx.ALIGN_LEFT)
             hsize.AddSpacer(space)
             hsize.Add(self.touch_btn_inten1, 0, wx.ALIGN_LEFT)
+            hsize.AddSpacer(space)
+            hsize.Add(self.touch_btn_switch_driver_version, 0, wx.ALIGN_LEFT)
             hsize.AddSpacer(space)
             self.sizer.Add(hsize, 0, wx.ALIGN_TOP)
 
@@ -1011,6 +1019,15 @@ class ADB_Frame(wx.Frame):
     def touch_Int_en_1_func(self,e):
         self.adb_tool.shell(self.panel_info.ECHO_INT_EN % "1", "SHELL")
 
+    def touch_switch_driver_version(self, e):
+        if self.touch_btn_switch_driver_version.GetValue() == False:
+            self.touch_btn_switch_driver_version.SetLabel("V1")
+            self.panel_info.setting_path(1)
+            print("use v1 driver")
+        else:
+            self.touch_btn_switch_driver_version.SetLabel("V2")
+            self.panel_info.setting_path(2)
+            print("use v2 driver")
 #=====================
     def display_1129_func(self,e):
         print("1129")
