@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1124</width>
-    <height>717</height>
+    <width>927</width>
+    <height>514</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,10 +20,10 @@
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>20</y>
+      <x>0</x>
+      <y>0</y>
       <width>111</width>
-      <height>641</height>
+      <height>491</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -33,30 +33,44 @@
      <property name="sizeConstraint">
       <enum>QLayout::SetMaximumSize</enum>
      </property>
+     <property name="leftMargin">
+      <number>5</number>
+     </property>
      <property name="topMargin">
-      <number>0</number>
+      <number>3</number>
      </property>
      <item>
-      <widget class="QToolBox" name="toolBox">
+      <widget class="QToolBox" name="LeftMainWindow">
        <property name="maximumSize">
         <size>
-         <width>110</width>
-         <height>16777215</height>
+         <width>100</width>
+         <height>600</height>
         </size>
        </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="styleSheet">
-        <string notr="true"/>
+        <string notr="true">background-color: rgb(85, 170, 127);
+color: rgb(255, 255, 255);</string>
        </property>
        <property name="currentIndex">
+        <number>1</number>
+       </property>
+       <property name="tabSpacing">
         <number>0</number>
        </property>
-       <widget class="QWidget" name="page">
+       <widget class="QWidget" name="pageWifi">
         <property name="geometry">
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>109</width>
-          <height>509</height>
+          <width>100</width>
+          <height>372</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -70,9 +84,18 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>110</width>
-           <height>24</height>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>WiFi Connect</string>
@@ -82,23 +105,44 @@
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>31</y>
-           <width>110</width>
-           <height>24</height>
+           <y>25</y>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>WiFi disconnect</string>
+         </property>
+         <property name="checkable">
+          <bool>false</bool>
          </property>
         </widget>
         <widget class="QPushButton" name="wifiReconnect">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>60</y>
-           <width>110</width>
-           <height>24</height>
+           <y>50</y>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>Reconnect</string>
@@ -107,19 +151,19 @@
           <bool>false</bool>
          </property>
         </widget>
-        <widget class="QLabel" name="label_2">
+        <widget class="QLabel" name="wifiStatus">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>90</y>
-           <width>110</width>
-           <height>21</height>
+           <y>80</y>
+           <width>100</width>
+           <height>25</height>
           </rect>
          </property>
          <property name="maximumSize">
           <size>
-           <width>110</width>
-           <height>16777215</height>
+           <width>100</width>
+           <height>25</height>
           </size>
          </property>
          <property name="font">
@@ -130,7 +174,7 @@
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">color: qconicalgradient(cx:0.5, cy:0.5, angle:0, stop:0 rgba(255, 255, 255, 255), stop:0.373979 rgba(255, 255, 255, 255), stop:0.373991 rgba(33, 30, 255, 255), stop:0.624018 rgba(33, 30, 255, 255), stop:0.624043 rgba(255, 0, 0, 255), stop:1 rgba(255, 0, 0, 255));</string>
+          <string notr="true">color: rgb(255, 0, 0);</string>
          </property>
          <property name="text">
           <string>WiFi Status</string>
@@ -143,13 +187,13 @@
          </property>
         </widget>
        </widget>
-       <widget class="QWidget" name="page_2">
+       <widget class="QWidget" name="pageAdb">
         <property name="geometry">
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>109</width>
-          <height>509</height>
+          <width>100</width>
+          <height>372</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -158,196 +202,337 @@
         <attribute name="label">
          <string>ADB</string>
         </attribute>
-        <widget class="QPushButton" name="wifiConnect_2">
+        <widget class="QPushButton" name="shutDown">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>110</width>
-           <height>24</height>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>ShutDown</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="wifiConnect_3">
+        <widget class="QPushButton" name="powerKey">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>30</y>
-           <width>110</width>
-           <height>24</height>
+           <y>25</y>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>PowerKey</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="wifiConnect_4">
+        <widget class="QPushButton" name="screenShot">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>60</y>
-           <width>110</width>
-           <height>24</height>
+           <y>50</y>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>ScreenShot</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="wifiConnect_5">
+        <widget class="QPushButton" name="reboot">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>90</y>
-           <width>110</width>
-           <height>24</height>
+           <y>75</y>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>Reboot</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="wifiConnect_6">
+        <widget class="QPushButton" name="home">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>120</y>
-           <width>110</width>
-           <height>24</height>
+           <y>100</y>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>Home</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="wifiConnect_7">
+        <widget class="QPushButton" name="back">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>150</y>
-           <width>110</width>
-           <height>24</height>
+           <y>125</y>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>Back</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="wifiConnect_8">
+        <widget class="QPushButton" name="volUp">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>180</y>
-           <width>110</width>
-           <height>24</height>
+           <y>150</y>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>Vol_up</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="wifiConnect_9">
+        <widget class="QPushButton" name="volDown">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>210</y>
-           <width>110</width>
-           <height>24</height>
+           <y>175</y>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>Vol_down</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="wifiConnect_10">
+        <widget class="QPushButton" name="getprop">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>240</y>
-           <width>110</width>
-           <height>24</height>
+           <y>200</y>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>Getprop</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="wifiConnect_11">
+        <widget class="QPushButton" name="interrupts">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>270</y>
-           <width>110</width>
-           <height>24</height>
+           <y>225</y>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>Interrupts</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="wifiConnect_14">
+        <widget class="QPushButton" name="checkDevices">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>300</y>
-           <width>110</width>
-           <height>24</height>
+           <y>250</y>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>CheckDevices</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="wifiConnect_15">
+        <widget class="QPushButton" name="hideVirtual">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>330</y>
-           <width>110</width>
-           <height>24</height>
+           <y>275</y>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>HideVirtual</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="wifiConnect_16">
+        <widget class="QPushButton" name="showVirtual">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>360</y>
-           <width>110</width>
-           <height>24</height>
+           <y>300</y>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>ShowVirtual</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="wifiConnect_17">
+        <widget class="QPushButton" name="openPoint">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>390</y>
-           <width>110</width>
-           <height>24</height>
+           <y>325</y>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>OpenPoint</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="wifiConnect_18">
+        <widget class="QPushButton" name="closePoint">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>420</y>
-           <width>110</width>
-           <height>24</height>
+           <y>350</y>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>ClosePoint</string>
@@ -367,13 +552,13 @@
          </property>
         </widget>
        </widget>
-       <widget class="QWidget" name="page_3">
+       <widget class="QWidget" name="pageTouch">
         <property name="geometry">
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>109</width>
-          <height>509</height>
+          <width>100</width>
+          <height>372</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -382,131 +567,212 @@
         <attribute name="label">
          <string>Touch</string>
         </attribute>
-        <widget class="QPushButton" name="wifiConnect_20">
+        <widget class="QPushButton" name="fwVersion">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>110</width>
-           <height>24</height>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>FWVersion</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="wifiConnect_21">
+        <widget class="QPushButton" name="reset">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>30</y>
-           <width>110</width>
-           <height>24</height>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>Reset</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="wifiConnect_22">
+        <widget class="QPushButton" name="senseon">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>60</y>
-           <width>110</width>
-           <height>24</height>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>SenseOn</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="wifiConnect_23">
+        <widget class="QPushButton" name="senseoff">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>90</y>
-           <width>110</width>
-           <height>24</height>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>SenseOff</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="wifiConnect_24">
+        <widget class="QPushButton" name="selftest">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>120</y>
-           <width>110</width>
-           <height>24</height>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>SelfTest</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="wifiConnect_25">
+        <widget class="QPushButton" name="inten0">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>150</y>
-           <width>110</width>
-           <height>24</height>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>Int_en_0</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="wifiConnect_26">
+        <widget class="QPushButton" name="inten1">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>180</y>
-           <width>110</width>
-           <height>24</height>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>Int_en_1</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="wifiConnect_27">
+        <widget class="QPushButton" name="driverVersion">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>210</y>
-           <width>110</width>
-           <height>24</height>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>DriverVersion</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="wifiConnect_28">
+        <widget class="QPushButton" name="flashDump">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>240</y>
-           <width>110</width>
-           <height>24</height>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>FlashDump</string>
          </property>
         </widget>
        </widget>
-       <widget class="QWidget" name="page_4">
+       <widget class="QWidget" name="pageDisplay">
         <property name="geometry">
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>109</width>
-          <height>509</height>
+          <width>100</width>
+          <height>372</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -515,53 +781,80 @@
         <attribute name="label">
          <string>Display</string>
         </attribute>
-        <widget class="QPushButton" name="wifiConnect_29">
+        <widget class="QPushButton" name="d1129">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>110</width>
-           <height>24</height>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>1129</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="wifiConnect_30">
+        <widget class="QPushButton" name="d2810">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>30</y>
-           <width>110</width>
-           <height>24</height>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>2810</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="wifiConnect_31">
+        <widget class="QPushButton" name="openBlight">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>60</y>
-           <width>110</width>
-           <height>24</height>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>OpenBlight</string>
          </property>
         </widget>
        </widget>
-       <widget class="QWidget" name="page_5">
+       <widget class="QWidget" name="pageOptions">
         <property name="geometry">
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>109</width>
-          <height>509</height>
+          <width>100</width>
+          <height>372</height>
          </rect>
         </property>
         <property name="font">
@@ -576,53 +869,83 @@
         <attribute name="label">
          <string>Options</string>
         </attribute>
-        <widget class="QTextEdit" name="textEdit_20">
+        <widget class="QTextEdit" name="diagArrText">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>30</y>
-           <width>100</width>
-           <height>31</height>
+           <width>99</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="maximumSize">
           <size>
-           <width>114</width>
-           <height>50</height>
+           <width>100</width>
+           <height>30</height>
           </size>
          </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
+         </property>
         </widget>
-        <widget class="QTextEdit" name="textEdit_21">
+        <widget class="QTextEdit" name="updateFWText">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>120</y>
-           <width>101</width>
-           <height>31</height>
+           <width>99</width>
+           <height>30</height>
           </rect>
          </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
+         </property>
         </widget>
-        <widget class="QPushButton" name="wifiConnect_32">
+        <widget class="QPushButton" name="diagArr">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>110</width>
-           <height>24</height>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>DiagArr</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="wifiConnect_33">
+        <widget class="QPushButton" name="updateFW">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>90</y>
-           <width>110</width>
-           <height>24</height>
+           <width>100</width>
+           <height>25</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>UpdateFW</string>
@@ -636,21 +959,35 @@
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>20</y>
-      <width>961</width>
-      <height>641</height>
+      <x>110</x>
+      <y>0</y>
+      <width>811</width>
+      <height>491</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMaximumSize</enum>
+     </property>
+     <property name="topMargin">
+      <number>3</number>
+     </property>
      <item>
-      <widget class="QTabWidget" name="tabWidget">
+      <widget class="QTabWidget" name="TabMainWindow">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
        <property name="currentIndex">
         <number>0</number>
        </property>
-       <widget class="QWidget" name="tab">
+       <widget class="QWidget" name="TabRawdataShow">
         <property name="font">
          <font>
+          <pointsize>10</pointsize>
           <weight>50</weight>
           <bold>false</bold>
          </font>
@@ -663,13 +1000,32 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>751</width>
-           <height>41</height>
+           <width>762</width>
+           <height>32</height>
           </rect>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
            <widget class="QPushButton" name="rawdataRead">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
@@ -682,59 +1038,101 @@
            </widget>
           </item>
           <item>
-           <widget class="QRadioButton" name="radioButton">
+           <widget class="QRadioButton" name="radioDC">
+            <property name="maximumSize">
+             <size>
+              <width>50</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="text">
              <string>DC</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QRadioButton" name="radioButton_2">
+           <widget class="QRadioButton" name="radioIIR">
+            <property name="maximumSize">
+             <size>
+              <width>50</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="text">
              <string>IIR</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QRadioButton" name="radioButton_3">
+           <widget class="QRadioButton" name="radioTmp">
+            <property name="maximumSize">
+             <size>
+              <width>15</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="text">
-             <string>Other</string>
+             <string/>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QTextEdit" name="textEdit">
+           <widget class="QTextEdit" name="textEditDiag">
             <property name="maximumSize">
              <size>
-              <width>16777215</width>
-              <height>30</height>
+              <width>60</width>
+              <height>29</height>
              </size>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_2">
+           <widget class="QPushButton" name="stop">
+            <property name="maximumSize">
+             <size>
+              <width>60</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="text">
              <string>Stop</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_3">
+           <widget class="QPushButton" name="sram">
+            <property name="maximumSize">
+             <size>
+              <width>60</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="text">
              <string>SRAM</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_13">
+           <widget class="QPushButton" name="log">
+            <property name="maximumSize">
+             <size>
+              <width>60</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="text">
              <string>Log</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_4">
+           <widget class="QPushButton" name="kmsg">
+            <property name="maximumSize">
+             <size>
+              <width>70</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="styleSheet">
              <string notr="true">background-color: rgb(255, 170, 0);</string>
             </property>
@@ -744,12 +1142,38 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_14">
+           <widget class="QTextEdit" name="textEditKmsg">
+            <property name="maximumSize">
+             <size>
+              <width>60</width>
+              <height>29</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="getevent">
+            <property name="maximumSize">
+             <size>
+              <width>70</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="styleSheet">
              <string notr="true">background-color: rgb(255, 170, 0);</string>
             </property>
             <property name="text">
              <string>Getevent</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTextEdit" name="textEditGetevent">
+            <property name="maximumSize">
+             <size>
+              <width>60</width>
+              <height>29</height>
+             </size>
             </property>
            </widget>
           </item>
@@ -759,314 +1183,317 @@
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>50</y>
-           <width>951</width>
-           <height>551</height>
+           <y>30</y>
+           <width>801</width>
+           <height>431</height>
           </rect>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
-           <widget class="QTextBrowser" name="textBrowser"/>
+           <widget class="QTextBrowser" name="rawdataShowText"/>
           </item>
          </layout>
         </widget>
        </widget>
-       <widget class="QWidget" name="tab_2">
+       <widget class="QWidget" name="TabRWRegister">
         <attribute name="title">
          <string>R/W register</string>
         </attribute>
-        <widget class="QPushButton" name="pushButton_12">
+        <widget class="QPushButton" name="pushButtonRead">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>10</y>
-           <width>75</width>
-           <height>31</height>
+           <y>5</y>
+           <width>150</width>
+           <height>30</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>30</height>
+          </size>
          </property>
          <property name="text">
           <string>Read</string>
          </property>
         </widget>
-        <widget class="QTextEdit" name="textEdit_18">
+        <widget class="QTextEdit" name="textEditReadRegAddr">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>50</y>
-           <width>151</width>
-           <height>171</height>
+           <y>40</y>
+           <width>150</width>
+           <height>170</height>
           </rect>
          </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>170</height>
+          </size>
+         </property>
         </widget>
-        <widget class="QTextBrowser" name="textBrowser_2">
+        <widget class="QTextBrowser" name="readRegValShowText">
          <property name="geometry">
           <rect>
            <x>160</x>
-           <y>10</y>
-           <width>721</width>
-           <height>271</height>
+           <y>5</y>
+           <width>640</width>
+           <height>260</height>
           </rect>
          </property>
         </widget>
-        <widget class="QTextEdit" name="textEdit_9">
+        <widget class="QTextEdit" name="textEditWriteVal3">
          <property name="geometry">
           <rect>
-           <x>250</x>
-           <y>410</y>
-           <width>151</width>
-           <height>31</height>
+           <x>320</x>
+           <y>390</y>
+           <width>150</width>
+           <height>30</height>
           </rect>
          </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>30</height>
+          </size>
+         </property>
         </widget>
-        <widget class="QPushButton" name="pushButton_11">
+        <widget class="QTextEdit" name="textEditWriteVal4">
          <property name="geometry">
           <rect>
-           <x>0</x>
-           <y>570</y>
-           <width>75</width>
-           <height>31</height>
+           <x>320</x>
+           <y>430</y>
+           <width>150</width>
+           <height>30</height>
           </rect>
          </property>
-         <property name="text">
-          <string>Write 7</string>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>30</height>
+          </size>
          </property>
         </widget>
-        <widget class="QTextEdit" name="textEdit_15">
+        <widget class="QTextEdit" name="textEditWriteVal2">
          <property name="geometry">
           <rect>
-           <x>90</x>
-           <y>530</y>
-           <width>151</width>
-           <height>31</height>
+           <x>320</x>
+           <y>350</y>
+           <width>150</width>
+           <height>30</height>
           </rect>
          </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>30</height>
+          </size>
+         </property>
         </widget>
-        <widget class="QTextEdit" name="textEdit_17">
+        <widget class="QTextEdit" name="textEditWriteAddr1">
          <property name="geometry">
           <rect>
-           <x>90</x>
-           <y>570</y>
-           <width>151</width>
-           <height>31</height>
+           <x>160</x>
+           <y>310</y>
+           <width>150</width>
+           <height>30</height>
           </rect>
          </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>30</height>
+          </size>
+         </property>
         </widget>
-        <widget class="QPushButton" name="pushButton_10">
+        <widget class="QTextEdit" name="textEditWriteAddr2">
          <property name="geometry">
           <rect>
-           <x>0</x>
-           <y>530</y>
-           <width>75</width>
-           <height>31</height>
+           <x>160</x>
+           <y>350</y>
+           <width>150</width>
+           <height>30</height>
           </rect>
          </property>
-         <property name="text">
-          <string>Write 6</string>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>30</height>
+          </size>
          </property>
         </widget>
-        <widget class="QTextEdit" name="textEdit_13">
+        <widget class="QTextEdit" name="textEditWriteAddr0">
          <property name="geometry">
           <rect>
-           <x>90</x>
-           <y>490</y>
-           <width>151</width>
-           <height>31</height>
+           <x>160</x>
+           <y>270</y>
+           <width>150</width>
+           <height>30</height>
           </rect>
          </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>30</height>
+          </size>
+         </property>
         </widget>
-        <widget class="QTextEdit" name="textEdit_11">
+        <widget class="QTextEdit" name="textEditWriteVal1">
          <property name="geometry">
           <rect>
-           <x>250</x>
-           <y>450</y>
-           <width>151</width>
-           <height>31</height>
+           <x>320</x>
+           <y>310</y>
+           <width>150</width>
+           <height>30</height>
           </rect>
          </property>
-        </widget>
-        <widget class="QTextEdit" name="textEdit_16">
-         <property name="geometry">
-          <rect>
-           <x>250</x>
-           <y>570</y>
-           <width>151</width>
-           <height>31</height>
-          </rect>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>30</height>
+          </size>
          </property>
         </widget>
-        <widget class="QTextEdit" name="textEdit_7">
-         <property name="geometry">
-          <rect>
-           <x>250</x>
-           <y>370</y>
-           <width>151</width>
-           <height>31</height>
-          </rect>
-         </property>
-        </widget>
-        <widget class="QTextEdit" name="textEdit_4">
-         <property name="geometry">
-          <rect>
-           <x>90</x>
-           <y>330</y>
-           <width>151</width>
-           <height>31</height>
-          </rect>
-         </property>
-        </widget>
-        <widget class="QTextEdit" name="textEdit_6">
-         <property name="geometry">
-          <rect>
-           <x>90</x>
-           <y>370</y>
-           <width>151</width>
-           <height>31</height>
-          </rect>
-         </property>
-        </widget>
-        <widget class="QTextEdit" name="textEdit_2">
-         <property name="geometry">
-          <rect>
-           <x>90</x>
-           <y>290</y>
-           <width>151</width>
-           <height>31</height>
-          </rect>
-         </property>
-        </widget>
-        <widget class="QTextEdit" name="textEdit_14">
-         <property name="geometry">
-          <rect>
-           <x>250</x>
-           <y>530</y>
-           <width>151</width>
-           <height>31</height>
-          </rect>
-         </property>
-        </widget>
-        <widget class="QTextEdit" name="textEdit_5">
-         <property name="geometry">
-          <rect>
-           <x>250</x>
-           <y>330</y>
-           <width>151</width>
-           <height>31</height>
-          </rect>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="pushButton_9">
+        <widget class="QPushButton" name="pushButtonRegWrite0">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>490</y>
-           <width>75</width>
-           <height>31</height>
+           <y>270</y>
+           <width>150</width>
+           <height>30</height>
           </rect>
          </property>
-         <property name="text">
-          <string>Write 5</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="pushButton">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>290</y>
-           <width>75</width>
-           <height>31</height>
-          </rect>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>30</height>
+          </size>
          </property>
          <property name="text">
           <string>Write 0</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="pushButton_5">
+        <widget class="QPushButton" name="pushButtonRegWrite1">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>330</y>
-           <width>75</width>
-           <height>31</height>
+           <y>310</y>
+           <width>150</width>
+           <height>30</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>30</height>
+          </size>
          </property>
          <property name="text">
           <string>Write 1</string>
          </property>
         </widget>
-        <widget class="QTextEdit" name="textEdit_3">
+        <widget class="QTextEdit" name="textEditWriteVal0">
          <property name="geometry">
           <rect>
-           <x>250</x>
-           <y>290</y>
-           <width>151</width>
-           <height>31</height>
+           <x>320</x>
+           <y>270</y>
+           <width>150</width>
+           <height>30</height>
           </rect>
          </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>30</height>
+          </size>
+         </property>
         </widget>
-        <widget class="QTextEdit" name="textEdit_8">
+        <widget class="QTextEdit" name="textEditWriteAddr3">
          <property name="geometry">
           <rect>
-           <x>90</x>
-           <y>410</y>
-           <width>151</width>
-           <height>31</height>
+           <x>160</x>
+           <y>390</y>
+           <width>150</width>
+           <height>30</height>
           </rect>
          </property>
-        </widget>
-        <widget class="QTextEdit" name="textEdit_12">
-         <property name="geometry">
-          <rect>
-           <x>250</x>
-           <y>490</y>
-           <width>151</width>
-           <height>31</height>
-          </rect>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>30</height>
+          </size>
          </property>
         </widget>
-        <widget class="QPushButton" name="pushButton_6">
+        <widget class="QPushButton" name="pushButtonRegWrite2">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>370</y>
-           <width>75</width>
-           <height>31</height>
+           <y>350</y>
+           <width>150</width>
+           <height>30</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>30</height>
+          </size>
          </property>
          <property name="text">
           <string>Write 2</string>
          </property>
         </widget>
-        <widget class="QTextEdit" name="textEdit_10">
+        <widget class="QTextEdit" name="textEditWriteAddr4">
          <property name="geometry">
           <rect>
-           <x>90</x>
-           <y>450</y>
-           <width>151</width>
-           <height>31</height>
+           <x>160</x>
+           <y>430</y>
+           <width>150</width>
+           <height>30</height>
           </rect>
          </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>30</height>
+          </size>
+         </property>
         </widget>
-        <widget class="QPushButton" name="pushButton_8">
+        <widget class="QPushButton" name="pushButtonRegWrite4">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>450</y>
-           <width>75</width>
-           <height>31</height>
+           <y>430</y>
+           <width>150</width>
+           <height>30</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>30</height>
+          </size>
          </property>
          <property name="text">
           <string>Write 4</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="pushButton_7">
+        <widget class="QPushButton" name="pushButtonRegWrite3">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>410</y>
-           <width>75</width>
-           <height>31</height>
+           <y>390</y>
+           <width>150</width>
+           <height>30</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>30</height>
+          </size>
          </property>
          <property name="text">
           <string>Write 3</string>
@@ -1076,30 +1503,97 @@
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>230</y>
-           <width>54</width>
-           <height>12</height>
+           <y>215</y>
+           <width>60</width>
+           <height>20</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>60</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>13</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
          </property>
          <property name="text">
           <string>Length</string>
          </property>
         </widget>
-        <widget class="QTextEdit" name="textEdit_19">
+        <widget class="QTextEdit" name="textEditReadRegLen">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>250</y>
-           <width>151</width>
-           <height>31</height>
+           <y>235</y>
+           <width>150</width>
+           <height>30</height>
           </rect>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>30</height>
+          </size>
          </property>
         </widget>
        </widget>
-       <widget class="QWidget" name="tab_5">
+       <widget class="QWidget" name="TabSwiplines">
         <attribute name="title">
          <string>Swipe Lines</string>
         </attribute>
+       </widget>
+       <widget class="QWidget" name="TabHelp">
+        <attribute name="title">
+         <string>Help</string>
+        </attribute>
+        <widget class="QTabWidget" name="TabHelpSubMain">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>801</width>
+           <height>461</height>
+          </rect>
+         </property>
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <widget class="QWidget" name="TabAbout">
+          <attribute name="title">
+           <string>About</string>
+          </attribute>
+          <widget class="QTextBrowser" name="aboutShowText">
+           <property name="geometry">
+            <rect>
+             <x>2</x>
+             <y>2</y>
+             <width>791</width>
+             <height>431</height>
+            </rect>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QWidget" name="TabCommands">
+          <attribute name="title">
+           <string>Commands</string>
+          </attribute>
+          <widget class="QTextBrowser" name="commandsShowText">
+           <property name="geometry">
+            <rect>
+             <x>2</x>
+             <y>2</y>
+             <width>791</width>
+             <height>431</height>
+            </rect>
+           </property>
+          </widget>
+         </widget>
+        </widget>
        </widget>
       </widget>
      </item>
